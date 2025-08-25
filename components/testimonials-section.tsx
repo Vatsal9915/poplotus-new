@@ -138,7 +138,7 @@ export default function TestimonialsSection() {
                 {/* Product Info */}
                 <div className="p-3">
                   <div className="flex items-center mb-2">
-                    <div className="w-6 h-6 bg-red-500 rounded-sm mr-2 flex-shrink-0"></div>
+                    <div className="w-6 h-6 bg-yellow-500 rounded-sm mr-2 flex-shrink-0"></div>
                     <p className="text-xs text-gray-600 truncate">{testimonial.productName}</p>
                   </div>
 

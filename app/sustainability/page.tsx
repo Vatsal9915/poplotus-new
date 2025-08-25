@@ -185,7 +185,7 @@ export default function SustainabilityPage() {
 
               <div className="relative">
                 <Image
-                  src="/sustainable-farming-practices.png"
+                  src="/farming.jpg"
                   alt="Sustainable farming practices"
                   width={600}
                   height={400}

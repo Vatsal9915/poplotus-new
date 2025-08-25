@@ -25,22 +25,22 @@ export default function CertificationsStrip() {
   const certifications = [
     {
       name: "FDA",
-      logo: "/placeholder.svg?height=80&width=120&text=FDA",
+      logo: "/fda.png",
       description: "Food and Drug Administration Approved",
     },
     {
       name: "BRC Food",
-      logo: "/placeholder.svg?height=80&width=120&text=BRC+FOOD",
+      logo: "/brc.png",
       description: "British Retail Consortium Certified",
     },
     {
       name: "GMP Quality",
-      logo: "/placeholder.svg?height=80&width=120&text=GMP",
+      logo: "/gmp.png",
       description: "Good Manufacturing Practice",
     },
     {
       name: "FSSAI",
-      logo: "/placeholder.svg?height=80&width=120&text=FSSAI",
+      logo: "/fssai.png",
       description: "Food Safety and Standards Authority of India",
     },
   ]
