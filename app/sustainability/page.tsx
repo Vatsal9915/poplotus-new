@@ -92,7 +92,7 @@ export default function SustainabilityPage() {
             >
               <div className="absolute inset-0 bg-green-200 rounded-full blur-3xl opacity-40"></div>
               <img
-                src="/farming.jpg"
+                src="/img.jpg"
                 alt="Sustainable farming"
                 className="relative z-10 rounded-2xl shadow-xl"
               />
