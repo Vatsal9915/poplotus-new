@@ -2,7 +2,15 @@
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { Recycle, Users, Target, Sprout } from "lucide-react";
+import {
+  Leaf,
+  Recycle,
+  Users,
+  Target,
+  Globe,
+  Sprout,
+  Trees,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -173,13 +181,12 @@ export default function SustainabilityPage() {
           </div>
         </section>
 
-        {/* 🌍 Global Reach (Spline Globe) */}
+        {/* 🌍 Global Reach (Spline Globe fixed) */}
         <section className="relative h-screen bg-black flex items-center justify-center overflow-hidden">
           <iframe
             src="https://my.spline.design/holographicearthwithdynamiclines-7pl8xHK4WPjFkUiWQTkwSzKg/"
             width="100%"
             height="100%"
-            className="absolute inset-0 w-full h-full"
           ></iframe>
           <div className="relative z-10 text-center max-w-3xl px-6">
             <h2 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
