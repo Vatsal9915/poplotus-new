@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function AboutHero() {
   return (
-    <section className="relative h-96 lg:h-[500px] overflow-hidden">
+    <section className="relative h-96 lg:h-screen overflow-hidden">
       <Image
         src="/about-hero-bg.png"
         alt="PopLotus Story"

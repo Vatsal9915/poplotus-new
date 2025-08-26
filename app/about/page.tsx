@@ -13,7 +13,7 @@ export default function AboutPage() {
       <main>
         <AboutHero />
         <BrandMission />
-        <Timeline />
+        {/* <Timeline /> */}
         <BehindSnacksSection />
         <AboutCtaSection />
       </main>
