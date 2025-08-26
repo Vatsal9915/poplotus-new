@@ -36,7 +36,7 @@ export default function SustainabilityPage() {
       <main>
         {/* Hero Section with Parallax */}
         <section
-          className="relative h-[80vh] bg-fixed bg-center bg-cover flex items-center justify-center text-center px-6"
+          className="relative h-screen bg-fixed bg-center bg-cover flex items-center justify-center text-center px-6"
           style={{ backgroundImage: "url('/farming.jpg')" }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
