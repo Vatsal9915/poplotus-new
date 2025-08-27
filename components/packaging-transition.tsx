@@ -70,6 +70,13 @@ export default function PackagingTransition() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleFlavorClick = (sectionId: string) => {
+    const targetElement = document.getElementById(sectionId)
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <section ref={sectionRef} className="relative w-full bg-black">
       <div
@@ -81,6 +88,7 @@ export default function PackagingTransition() {
           <div
             key={product.name}
             className="w-screen h-screen relative flex items-center justify-center cursor-pointer group"
+            onClick={() => handleFlavorClick(product.sectionId)}
           >
             <Image
               src={product.image || "/placeholder.svg"}
@@ -95,7 +103,7 @@ export default function PackagingTransition() {
                 <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">Premium Roasted Makhana</p>
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <p className="text-lg bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30">
-                    Scroll to explore this flavor
+                    Click to explore the flavor
                   </p>
                 </div>
               </div>
@@ -119,7 +127,7 @@ export default function PackagingTransition() {
             />
           ))}
         </div>
-        <p className="text-white text-sm text-center drop-shadow-lg">Scroll to explore flavors</p>
+        <p className="text-white text-sm text-center drop-shadow-lg">Click to explore flavors</p>
       </div>
     </section>
   )
