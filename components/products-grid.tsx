@@ -339,19 +339,54 @@ export default function ProductsGrid() {
   )
 
   const BuildYourOwnBoxCard = () => (
-    <Card className="group cursor-pointer border-2 border-dashed border-gold/50 hover:border-gold transition-colors duration-200 relative overflow-hidden bg-gradient-to-br from-gold/5 to-beige/10">
-      <CardContent className="p-0">
-        <div className="relative overflow-hidden h-64 flex items-center justify-center bg-gradient-to-br from-gold/10 to-beige/20">
-          <div className="text-center">
-            <div className="w-20 h-20 mx-auto mb-4 bg-gold/20 rounded-full flex items-center justify-center">
-              <Gift className="w-10 h-10 text-gold" />
+    <Card className="group relative cursor-pointer border-2 border-dashed border-gold/30 hover:border-gold transition-all duration-700 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-transparent group-hover:from-gold/30 group-hover:to-amber-300/40 transition-all duration-500 z-0"></div>
+
+      <CardContent className="relative z-10 p-6">
+        <div className="relative overflow-hidden h-64 flex flex-col items-center justify-center transition-all duration-500">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-6 left-6 w-2 h-2 bg-gold/40 rounded-full animate-pulse"></div>
+            <div
+              className="absolute top-4 right-8 text-gold/30 text-sm animate-bounce"
+              style={{ animationDelay: "0.5s" }}
+            >
+              ✦
             </div>
-            <h3 className="font-serif text-xl font-semibold text-gold mb-2">Build Your Own Box</h3>
-            <p className="text-sm text-gray-600 px-4">Create a custom mix of your favorite flavors</p>
+            <div
+              className="absolute bottom-8 left-4 text-beige/50 text-xs animate-pulse"
+              style={{ animationDelay: "1s" }}
+            >
+              ✧
+            </div>
+            <div
+              className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-gold/30 rounded-full animate-bounce"
+              style={{ animationDelay: "1.5s" }}
+            ></div>
           </div>
+
+          <div className="w-16 h-16 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+            <Gift className="w-8 h-8 text-gold" />
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 w-32 h-20 mx-auto mb-4">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-lg border-2 border-dashed border-gold/20 flex items-center justify-center text-lg font-bold text-gold/60 hover:text-gold hover:border-gold/40 transition-all duration-300 cursor-pointer group-hover:scale-105 shadow-sm hover:shadow-md"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <span className="transition-all duration-300">?</span>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="font-serif text-xl font-semibold text-gold mb-2 text-center">Build Your Own Box</h3>
+          <p className="text-sm text-gray-600 px-4 text-center leading-relaxed">
+            Create a custom mix of your favorite flavors
+          </p>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 transition-all duration-500">
           <div className="text-center mb-4">
             <p className="text-gray-600 text-sm leading-relaxed">
               Choose from all our premium products and create your perfect snacking combination
@@ -365,7 +400,7 @@ export default function ProductsGrid() {
                 buildYourOwnSection.scrollIntoView({ behavior: "smooth", block: "start" })
               }
             }}
-            className="w-full bg-gold hover:bg-gold/90 text-white"
+            className="w-full bg-gold hover:bg-gold/90 text-white font-semibold py-3 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg opacity-100"
           >
             Start Building
           </Button>
@@ -392,7 +427,7 @@ export default function ProductsGrid() {
                 pleasure
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <BuildYourOwnBoxCard />
               {makhanaProducts.map((product) => (
                 <div
