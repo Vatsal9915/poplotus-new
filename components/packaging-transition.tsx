@@ -64,17 +64,22 @@ export default function PackagingTransition() {
 
     const handleScroll = () => {
       const scrollTop = window.scrollY - section.offsetTop
-      const slideHeight = window.innerHeight
 
       if (scrollTop >= 0 && scrollTop < sectionHeight) {
-        // Calculate which slide should be shown based on scroll position
+        const slideHeight = sectionHeight / products.length
         const slideIndex = Math.floor(scrollTop / slideHeight)
         const clampedIndex = Math.max(0, Math.min(slideIndex, products.length - 1))
 
-        // Discrete slide transition - no smooth animation
-        const translateX = -clampedIndex * window.innerWidth
-        container.style.transform = `translateX(${translateX}px)`
-        setCurrentProduct(clampedIndex)
+        if (clampedIndex !== currentProduct) {
+          const translateX = -clampedIndex * window.innerWidth
+          container.style.transition = "transform 0.1s ease-out"
+          container.style.transform = `translateX(${translateX}px)`
+          setCurrentProduct(clampedIndex)
+
+          setTimeout(() => {
+            container.style.transition = ""
+          }, 500)
+        }
       }
     }
 
@@ -83,7 +88,7 @@ export default function PackagingTransition() {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", checkMobile)
     }
-  }, [isMobile])
+  }, [isMobile, currentProduct])
 
   const handleFlavorClick = (sectionId: string) => {
     const targetElement = document.getElementById(sectionId)
@@ -95,7 +100,6 @@ export default function PackagingTransition() {
   return (
     <section ref={sectionRef} className="relative w-full bg-black">
       {isMobile ? (
-        // Mobile: Simple vertical stack
         <div className="space-y-0">
           {products.map((product, index) => (
             <div
@@ -114,7 +118,6 @@ export default function PackagingTransition() {
           ))}
         </div>
       ) : (
-        // Desktop: Discrete slide transition
         <div
           ref={containerRef}
           className="sticky top-0 left-0 h-screen flex"
