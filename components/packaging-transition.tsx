@@ -72,7 +72,7 @@ export default function PackagingTransition() {
 
         if (clampedIndex !== currentProduct) {
           const translateX = -clampedIndex * window.innerWidth
-          container.style.transition = "transform 0.1s ease-out"
+          container.style.transition = "transform 0.4s ease-out"
           container.style.transform = `translateX(${translateX}px)`
           setCurrentProduct(clampedIndex)
 
