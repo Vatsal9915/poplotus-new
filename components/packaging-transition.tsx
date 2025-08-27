@@ -90,7 +90,7 @@ export default function PackagingTransition() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-black" style={{ height: "150vh" }}>
+    <section className="relative overflow-hidden bg-black" style={{ height: "100vh" }}>
       {" "}
       {/* Reduced section height from 250vh to 150vh */}
       <div className="sticky top-0 h-screen">
