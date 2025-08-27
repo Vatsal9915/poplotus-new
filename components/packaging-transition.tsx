@@ -40,8 +40,16 @@ export default function PackagingTransition() {
   const sectionRef = useRef<HTMLDivElement | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [currentProduct, setCurrentProduct] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
     const section = sectionRef.current
     const container = containerRef.current
     if (!section || !container) return
@@ -67,7 +75,10 @@ export default function PackagingTransition() {
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", checkMobile)
+    }
   }, [])
 
   const handleFlavorClick = (sectionId: string) => {
@@ -98,12 +109,18 @@ export default function PackagingTransition() {
               priority={index === 0}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-              <div className="text-center text-white z-10">
-                <h3 className="font-serif text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl">{product.name}</h3>
-                <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">Premium Roasted Makhana</p>
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-lg bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30">
-                    Click to explore the flavor
+              <div className="text-center text-white z-10 px-4 sm:px-6 md:px-8">
+                <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-4 drop-shadow-2xl leading-tight">
+                  {product.name}
+                </h3>
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6 md:mb-8 drop-shadow-lg">
+                  Premium Roasted Makhana
+                </p>
+                <div
+                  className={`${isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-300`}
+                >
+                  <p className="text-sm sm:text-base md:text-lg bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/30 inline-block">
+                    {isMobile ? "Tap to explore the flavor" : "Click to explore the flavor"}
                   </p>
                 </div>
               </div>
@@ -113,13 +130,12 @@ export default function PackagingTransition() {
         ))}
       </div>
 
-      {/* Progress dots */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex space-x-3 mb-4">
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 px-4">
+        <div className="flex space-x-2 sm:space-x-3 mb-2 sm:mb-4 justify-center">
           {products.map((_, index) => (
             <span
               key={index}
-              className={`w-4 h-4 rounded-full transition-all duration-500 ease-out border-2 ${
+              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-500 ease-out border-2 ${
                 index === currentProduct
                   ? "bg-white border-white scale-125 shadow-lg"
                   : "bg-transparent border-white/50"
@@ -127,7 +143,9 @@ export default function PackagingTransition() {
             />
           ))}
         </div>
-        <p className="text-white text-sm text-center drop-shadow-lg">Click to explore flavors</p>
+        <p className="text-white text-xs sm:text-sm text-center drop-shadow-lg">
+          {isMobile ? "Tap to explore flavors" : "Click to explore flavors"}
+        </p>
       </div>
     </section>
   )
