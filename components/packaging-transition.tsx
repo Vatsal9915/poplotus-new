@@ -59,23 +59,22 @@ export default function PackagingTransition() {
       return
     }
 
-    const totalWidth = window.innerWidth * products.length
-    const scrollDistance = totalWidth - window.innerWidth
-
-    // Section height = horizontal scroll distance + viewport height
-    section.style.height = `${scrollDistance + window.innerHeight}px`
+    const sectionHeight = window.innerHeight * products.length
+    section.style.height = `${sectionHeight}px`
 
     const handleScroll = () => {
       const scrollTop = window.scrollY - section.offsetTop
+      const slideHeight = window.innerHeight
 
-      if (scrollTop >= 0 && scrollTop <= scrollDistance) {
-        container.style.transform = `translateX(-${scrollTop}px)`
-        const progress = scrollTop / scrollDistance
-        const productIndex = Math.round(progress * (products.length - 1))
-        setCurrentProduct(productIndex)
-      } else if (scrollTop > scrollDistance) {
-        container.style.transform = `translateX(-${scrollDistance}px)`
-        setCurrentProduct(products.length - 1)
+      if (scrollTop >= 0 && scrollTop < sectionHeight) {
+        // Calculate which slide should be shown based on scroll position
+        const slideIndex = Math.floor(scrollTop / slideHeight)
+        const clampedIndex = Math.max(0, Math.min(slideIndex, products.length - 1))
+
+        // Discrete slide transition - no smooth animation
+        const translateX = -clampedIndex * window.innerWidth
+        container.style.transform = `translateX(${translateX}px)`
+        setCurrentProduct(clampedIndex)
       }
     }
 
@@ -111,55 +110,29 @@ export default function PackagingTransition() {
                 className="object-cover"
                 priority={index === 0}
               />
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <div className="text-center text-white z-10 px-4">
-                  <h3 className="font-serif text-3xl font-bold mb-2 drop-shadow-2xl leading-tight">{product.name}</h3>
-                  <p className="text-base mb-4 drop-shadow-lg">Premium Roasted Makhana</p>
-                  <p className="text-sm bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 inline-block">
-                    Tap to explore the flavor
-                  </p>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
             </div>
           ))}
         </div>
       ) : (
-        // Desktop: Horizontal scroll transition
+        // Desktop: Discrete slide transition
         <div
           ref={containerRef}
-          className="sticky top-0 left-0 h-screen flex transition-transform duration-300 ease-out"
+          className="sticky top-0 left-0 h-screen flex"
           style={{ width: `${products.length * 100}vw` }}
         >
           {products.map((product, index) => (
             <div
               key={product.name}
-              className="w-screen h-screen relative flex items-center justify-center cursor-pointer group"
+              className="w-screen h-screen relative flex items-center justify-center cursor-pointer"
               onClick={() => handleFlavorClick(product.sectionId)}
             >
               <Image
                 src={product.image || "/placeholder.svg"}
                 alt={`PopLotus ${product.name} Makhana`}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover"
                 priority={index === 0}
               />
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <div className="text-center text-white z-10 px-4 sm:px-6 md:px-8">
-                  <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-4 drop-shadow-2xl leading-tight">
-                    {product.name}
-                  </h3>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6 md:mb-8 drop-shadow-lg">
-                    Premium Roasted Makhana
-                  </p>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-sm sm:text-base md:text-lg bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/30 inline-block">
-                      Click to explore the flavor
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
             </div>
           ))}
         </div>
@@ -167,11 +140,11 @@ export default function PackagingTransition() {
 
       {!isMobile && (
         <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 px-4">
-          <div className="flex space-x-2 sm:space-x-3 mb-2 sm:mb-4 justify-center">
+          <div className="flex space-x-2 sm:space-x-3 justify-center">
             {products.map((_, index) => (
               <span
                 key={index}
-                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-500 ease-out border-2 ${
+                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 border-2 ${
                   index === currentProduct
                     ? "bg-white border-white scale-125 shadow-lg"
                     : "bg-transparent border-white/50"
@@ -179,10 +152,8 @@ export default function PackagingTransition() {
               />
             ))}
           </div>
-          <p className="text-white text-xs sm:text-sm text-center drop-shadow-lg">Click to explore flavors</p>
         </div>
       )}
     </section>
   )
 }
-
