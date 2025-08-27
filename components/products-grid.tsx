@@ -372,10 +372,12 @@ export default function ProductsGrid() {
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-white rounded-lg border-2 border-dashed border-gold/20 flex items-center justify-center text-lg font-bold text-gold/60 hover:text-gold hover:border-gold/40 transition-all duration-300 cursor-pointer group-hover:scale-105 shadow-sm hover:shadow-md"
+                className="bg-white rounded-lg border-2 border-dashed border-gold/20 flex items-center justify-center text-lg font-bold transition-all duration-300 cursor-pointer shadow-sm"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <span className="transition-all duration-300">?</span>
+                <span className="transition-all duration-300 text-gold/60 group-hover:text-gold opacity-0 group-hover:opacity-100">
+                  ?
+                </span>
               </div>
             ))}
           </div>
