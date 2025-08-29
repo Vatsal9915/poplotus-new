@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
 import Image from "next/image"
 
 // Counter Component (Optimized)
