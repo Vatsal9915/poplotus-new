@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const processSteps = [
   {
@@ -27,6 +27,15 @@ const processSteps = [
 
 export default function BehindSnacksSection() {
   const [activeStep, setActiveStep] = useState(0)
+
+  // Auto-cycle steps
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % processSteps.length)
+    }, 3000) // change step every 3 seconds
+
+    return () => clearInterval(interval) // cleanup on unmount
+  }, [])
 
   return (
     <section className="py-20 bg-gradient-to-br from-beige/10 to-beige/30">
