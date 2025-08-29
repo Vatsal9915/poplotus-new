@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const processSteps = [
   {
@@ -27,18 +27,40 @@ const processSteps = [
 
 export default function BehindSnacksSection() {
   const [activeStep, setActiveStep] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement | null>(null)
 
-  // Auto-cycle steps
+  // Start auto-cycle only when section is visible
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % processSteps.length)
-    }, 3000) // change step every 3 seconds
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => setIsVisible(entry.isIntersecting))
+      },
+      { threshold: 0.3 } // trigger when 30% of section is visible
+    )
 
-    return () => clearInterval(interval) // cleanup on unmount
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+    }
   }, [])
 
+  // Auto-cycle steps only when visible
+  useEffect(() => {
+    if (!isVisible) return
+
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % processSteps.length)
+    }, 3000) // 3 seconds
+
+    return () => clearInterval(interval)
+  }, [isVisible])
+
   return (
-    <section className="py-20 bg-gradient-to-br from-beige/10 to-beige/30">
+    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-beige/10 to-beige/30">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-4">Behind the Snacks</h2>
@@ -80,14 +102,19 @@ export default function BehindSnacksSection() {
             ))}
           </div>
 
-          {/* Active step image */}
+          {/* Active step image with fade transition */}
           <div className="relative">
-            <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-              <img
-                src={processSteps[activeStep].image || "/placeholder.svg"}
-                alt={processSteps[activeStep].title}
-                className="w-full h-full object-cover transition-all duration-500"
-              />
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative">
+              {processSteps.map((step, index) => (
+                <img
+                  key={index}
+                  src={step.image || "/placeholder.svg"}
+                  alt={step.title}
+                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ${
+                    activeStep === index ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
             </div>
             <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-gold to-yellow-600 text-white px-6 py-3 rounded-full font-medium shadow-lg">
               Step {activeStep + 1}
