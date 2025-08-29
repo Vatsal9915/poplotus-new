@@ -1,167 +1,140 @@
-"use client";
+"use client"
 
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import Image from "next/image"
 
-// Counter Component
-const Counter = ({ end, label }: { end: number; label: string }) => {
-  const [count, setCount] = useState(0);
-
+// Counter Component (Optimized)
+const Counter = ({ end, duration, suffix }: { end: number; duration: number; suffix?: string }) => {
+  const [count, setCount] = useState(0)
   useEffect(() => {
-    let start = 0;
-    const startTime = performance.now();
-    const duration = 2 * 1000; // 2 seconds
+    let startTime: number | null = null
     const step = (timestamp: number) => {
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * end));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [end]);
-
-  return (
-    <div className="text-center text-white">
-      <motion.h3
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl font-bold text-gold"
-      >
-        {count}+
-      </motion.h3>
-      <p className="text-lg">{label}</p>
-    </div>
-  );
-};
+      if (!startTime) startTime = timestamp
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
+      setCount(Math.floor(progress * end))
+      if (progress < 1) requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
+  }, [end, duration])
+  return <span>{count}{suffix}</span>
+}
 
 export default function SustainabilityPage() {
   return (
-    <div
-      className="relative w-full min-h-screen text-white"
-      style={{
-        backgroundImage: "url('/farming.jpg')",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-0" />
+    <div className="relative min-h-screen flex flex-col text-white">
+      {/* Constant Background */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src="/farming.jpg"
+          alt="Background farming"
+          layout="fill"
+          objectFit="cover"
+          className="brightness-75"
+          priority
+        />
+      </div>
 
-      {/* Hero Section */}
-      <section className="relative z-10 flex items-center justify-center h-screen px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-        >
-          <h1 className="text-5xl font-bold text-gold drop-shadow-lg">Farm to Shelf</h1>
-          <p className="mt-4 text-xl max-w-2xl mx-auto">
-            At <span className="text-gold">PopLotus</span>, sustainability is not a choice — it’s our way of life.
-            From supporting farmers to eco-friendly packaging, we’re building a smarter, greener future.
-          </p>
-        </motion.div>
-      </section>
+      {/* Overlay for darkening */}
+      <div className="fixed inset-0 bg-black/40 z-0" />
 
-      {/* Mission Section */}
-      <section className="relative z-10 py-20 px-6 bg-black/40 backdrop-blur-sm">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-semibold text-gold">Our Mission</h2>
-          <p className="mt-6 text-lg leading-relaxed">
-            We partner with farmers, use renewable resources, and focus on eco-conscious packaging to ensure
-            every PopLotus snack helps protect our planet and empower communities.
-          </p>
-        </div>
-      </section>
+      {/* Navbar */}
+      <div className="relative z-20">
+        <Navbar />
+      </div>
 
-      {/* Counters Section */}
-      <section className="relative z-10 py-20 bg-black/30 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Counter end={5000} label="Farmers Impacted" />
-          <Counter end={120} label="Tons of CO₂ Reduced" />
-          <Counter end={40} label="Countries Reached" />
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="relative z-10 py-20 px-6 bg-black/40 backdrop-blur-sm">
-        <h2 className="text-4xl text-center font-semibold text-gold mb-12">Our Journey</h2>
-        <div className="max-w-5xl mx-auto grid gap-10">
-          {[
-            { step: "Farm", desc: "Directly sourced from trusted local farmers." },
-            { step: "Processing", desc: "Clean, minimal processing to preserve nutrition." },
-            { step: "Packaging", desc: "Eco-friendly, recyclable packaging." },
-            { step: "Logistics", desc: "Optimized routes to reduce carbon footprint." },
-            { step: "Shelf", desc: "Bringing sustainable snacks to the world." },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="p-6 rounded-2xl border border-gold/40 bg-black/50 backdrop-blur"
+      {/* Main Content */}
+      <main className="relative z-10 flex-1 overflow-hidden">
+        <div className="relative z-10">
+          {/* Hero Section */}
+          <section className="h-screen flex flex-col items-center justify-center text-center px-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl md:text-6xl font-bold text-gold drop-shadow-lg"
             >
-              <h3 className="text-2xl font-bold text-gold">{item.step}</h3>
-              <p className="mt-2">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+              Sustainability at PopLotus
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="mt-6 max-w-2xl text-lg text-gray-200"
+            >
+              From farm to shelf, we ensure every step is sustainable, ethical, and responsible.
+            </motion.p>
+          </section>
 
-      {/* Certifications Section */}
-      <section className="relative z-10 py-20 px-6 bg-black/30 backdrop-blur-sm">
-        <h2 className="text-4xl text-center font-semibold text-gold mb-12">Our Certifications</h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {["FSSAI", "ISO 22000", "HACCP", "Organic Certified"].map((cert, i) => (
-            <Card key={i} className="bg-black/50 border border-gold/40">
-              <CardContent className="flex items-center justify-center p-6 text-lg font-semibold text-gold">
-                {cert}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+          {/* Our Mission */}
+          <section className="py-24 text-center px-6 bg-black/40">
+            <h2 className="text-4xl font-semibold text-gold">Our Mission</h2>
+            <p className="mt-6 max-w-3xl mx-auto text-gray-200">
+              At PopLotus, we’re redefining healthy snacking by supporting local farmers, using eco-friendly packaging, and reducing carbon footprint. Every pack you open contributes to a greener tomorrow.
+            </p>
+          </section>
 
-      {/* FAQ Section */}
-      <section className="relative z-10 py-20 px-6 bg-black/40 backdrop-blur-sm">
-        <h2 className="text-4xl text-center font-semibold text-gold mb-12">FAQs</h2>
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible>
-            <AccordionItem value="q1">
-              <AccordionTrigger>How do you support farmers?</AccordionTrigger>
-              <AccordionContent>
-                We provide fair pricing, training, and sustainable farming support to ensure long-term growth.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q2">
-              <AccordionTrigger>Is your packaging eco-friendly?</AccordionTrigger>
-              <AccordionContent>
-                Yes! We use recyclable, minimal-plastic packaging designed to reduce waste.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q3">
-              <AccordionTrigger>How do you reduce carbon emissions?</AccordionTrigger>
-              <AccordionContent>
-                By optimizing transport, sourcing locally, and supporting renewable practices.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </section>
+          {/* Sustainability Pillars */}
+          <section className="py-24 px-6 grid md:grid-cols-3 gap-10 text-center bg-black/40">
+            {[
+              { title: "Supporting Farmers", desc: "We work directly with farmers to ensure fair trade and sustainable sourcing." },
+              { title: "Eco-Friendly Packaging", desc: "Our packaging is designed to minimize waste and maximize recyclability." },
+              { title: "Carbon Footprint", desc: "We are committed to reducing emissions across our supply chain." }
+            ].map((pillar, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: i * 0.2 }}
+                className="p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-gold/30 hover:border-gold transition"
+              >
+                <h3 className="text-2xl font-semibold text-gold">{pillar.title}</h3>
+                <p className="mt-4 text-gray-200">{pillar.desc}</p>
+              </motion.div>
+            ))}
+          </section>
 
-      {/* Call-to-Action Section */}
-      <section className="relative z-10 py-20 px-6 bg-black/50 backdrop-blur-sm text-center">
-        <h2 className="text-4xl font-semibold text-gold">Join the PopLotus Revolution</h2>
-        <p className="mt-4 max-w-2xl mx-auto text-lg">
-          Be part of the sustainable snacking movement. Together, we can make the world healthier and greener.
-        </p>
-        <Button className="mt-6 bg-gold text-black hover:bg-gold/90">Partner With Us</Button>
-      </section>
+          {/* Impact Numbers */}
+          <section className="py-24 text-center px-6 bg-black/40">
+            <h2 className="text-4xl font-semibold text-gold">Our Impact</h2>
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div>
+                <span className="text-5xl font-bold text-gold"><Counter end={500} duration={2} suffix="+" /></span>
+                <p className="mt-2 text-gray-200">Farmers Empowered</p>
+              </div>
+              <div>
+                <span className="text-5xl font-bold text-gold"><Counter end={100} duration={2} suffix="%" /></span>
+                <p className="mt-2 text-gray-200">Eco-Friendly Packaging</p>
+              </div>
+              <div>
+                <span className="text-5xl font-bold text-gold"><Counter end={20} duration={2} suffix=" tons" /></span>
+                <p className="mt-2 text-gray-200">CO₂ Saved Annually</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Call to Action */}
+          <section className="py-24 text-center px-6 bg-black/60">
+            <h2 className="text-4xl font-semibold text-gold">Join Our Mission</h2>
+            <p className="mt-4 text-gray-200 max-w-2xl mx-auto">
+              Be a part of the PopLotus sustainability journey. Together, we can create a healthier planet.
+            </p>
+            <a
+              href="https://poplotus-new.vercel.app/contact"
+              className="mt-8 inline-block px-8 py-4 bg-gold text-black font-semibold rounded-full shadow-lg hover:bg-yellow-500 transition"
+            >
+              Partner with Us
+            </a>
+          </section>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <div className="relative z-20">
+        <Footer />
+      </div>
     </div>
-  );
+  )
 }
