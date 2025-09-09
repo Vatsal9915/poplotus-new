@@ -21,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "PopLotus - Premium Healthy Snacks",
   description: "Premium makhana (foxnuts) and healthy snacks for a better lifestyle",
-  generator: "v0.dev",
+  generator: "vatsal",
 }
 
 export default function RootLayout({
