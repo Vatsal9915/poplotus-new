@@ -16,7 +16,7 @@ export default function VideoBanner() {
           className="w-full h-full object-cover"
           poster="/premium-makhana-foxnuts.png"
         >
-          <source src="/Final_video.mp4" type="video/mp4" />
+          <source src="/Healthy_Cookie_Alternative_Video_Generated.mp4" type="video/mp4" />
           {/* Fallback gradient background */}
           <div className="w-full h-full bg-gradient-to-br from-amber-100 via-orange-50 to-gold/20"></div>
         </video>
