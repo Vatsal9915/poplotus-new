@@ -10,7 +10,6 @@ export default function VideoBanner() {
       <div className="absolute inset-0">
         <video
           autoPlay
-          
           loop
           playsInline
           className="w-full h-full object-cover"
