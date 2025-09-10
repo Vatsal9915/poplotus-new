@@ -473,7 +473,7 @@ export default function ProductsGrid() {
           </section>
 
           {/* Chana Jor Garam Section */}
-          <section className="mb-20">
+          {/*<section className="mb-20">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mb-4">Chana Jor Garam</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -486,6 +486,7 @@ export default function ProductsGrid() {
               ))}
             </div>
           </section>
+          */}
 
           {/* Gifting Section */}
           <section className="mb-20">
