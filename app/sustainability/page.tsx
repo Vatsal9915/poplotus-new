@@ -47,7 +47,7 @@ export default function SustainabilityPage() {
       <div
         className="fixed inset-0 z-0"
         style={{
-          backgroundImage: "url('/farming.jpg')",
+          backgroundImage: "url('/farming1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
