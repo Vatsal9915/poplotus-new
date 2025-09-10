@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Menu, X, ShoppingBag, Sparkles, Heart, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -48,9 +49,14 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center group" onClick={handleNavClick}>
-              <span className="font-serif text-2xl font-bold text-gray-900 group-hover:text-gold transition-colors duration-300">
-                PopLotus
-              </span>
+              <Image
+                src="/logo.png"
+                alt="PopLotus Logo"
+                width={140}   // adjust width as needed
+                height={40}   // adjust height as needed
+                className="object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
