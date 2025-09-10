@@ -97,7 +97,7 @@ export default function ContactForm() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
                   <p className="text-gray-600">
-                    PopLotus Foods Pvt. Ltd.
+                    Nutralike Superfoods Pvt. Ltd.
                     <br />
                     7, Bangur Avenue, Block D
                     <br />
