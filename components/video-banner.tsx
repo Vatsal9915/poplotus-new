@@ -21,7 +21,7 @@ export default function VideoBanner() {
           <div className="w-full h-full bg-gradient-to-br from-amber-100 via-orange-50 to-gold/20"></div>
         </video>
         {/* Overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
       </div>
 
       {/* Content Overlay */}
