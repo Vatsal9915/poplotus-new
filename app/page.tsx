@@ -10,6 +10,7 @@ import FindUsSection from "@/components/find-us-section"
 import Newsletter from "@/components/newsletter"
 import Footer from "@/components/footer"
 import CartProgressBar from "@/components/cart-progress-bar"
+import WelcomePopup from "@/components/welcome-popup"
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
       <Newsletter />
       <Footer />
       <CartProgressBar />
+      <WelcomePopup />
     </div>
   )
 }
