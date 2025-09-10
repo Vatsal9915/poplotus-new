@@ -50,10 +50,10 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className="flex items-center group" onClick={handleNavClick}>
               <Image
-                src="/logo.png"
+                src="/logo1.png"
                 alt="PopLotus Logo"
                 width={140}   // adjust width as needed
-                height={40}   // adjust height as needed
+                height={39}   // adjust height as needed
                 className="object-contain"
                 priority
               />
