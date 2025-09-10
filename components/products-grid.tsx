@@ -506,6 +506,21 @@ export default function ProductsGrid() {
             </div>
           </section>
 
+          {/* Makhana Bhujiya Banner */}
+<section className="relative mb-20">
+  <div className="bg-gradient-to-r from-amber-100 to-yellow-200 rounded-2xl shadow-lg py-16 px-6 text-center">
+    <h2 className="text-4xl sm:text-5xl font-extrabold text-amber-800 drop-shadow-md">
+      Makhana Bhujiya
+    </h2>
+    <p className="mt-4 text-xl sm:text-2xl font-semibold text-gray-700">
+       Coming Soon!
+    </p>
+    <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
+      A crunchy twist on tradition — stay tuned for our new healthy snack innovation.
+    </p>
+  </div>
+</section>
+
           {/* Call to action */}
           <div className="text-center mt-16 bg-beige/20 rounded-2xl p-12">
             <h3 className="font-serif text-2xl font-semibold text-gray-900 mb-4">Still can't decide?</h3>
