@@ -55,7 +55,7 @@ export default function SustainabilityPage() {
       />
 
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-10" />
+      <div className="fixed inset-0 bg-black/20 z-10" />
 
       {/* Navigation */}
       <header className="relative z-30">
