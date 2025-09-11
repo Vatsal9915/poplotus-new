@@ -1,7 +1,4 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -13,32 +10,47 @@ export async function POST(req: Request) {
     const message = formData.get("message") as string;
     const file = formData.get("file") as File | null;
 
-    let attachments = [];
-
+    // Build attachments if file uploaded
+    let attachments: any[] = [];
     if (file) {
       const buffer = Buffer.from(await file.arrayBuffer());
       attachments.push({
         filename: file.name,
-        content: buffer.toString("base64"), // Resend requires base64 encoding
+        content: buffer.toString("base64"),
       });
     }
 
-    await resend.emails.send({
-      from: "PopLotus Contact <onboarding@resend.dev>", // replace with verified domain later
-      to: "contact@poplotus.in",
-      subject: `📩 New Query: ${subject}`,
-      html: `
-        <h2>New Message from PopLotus Website</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Subject:</b> ${subject}</p>
-        <p><b>Message:</b> ${message}</p>
-      `,
-      attachments,
+    // Call Resend REST API
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "PopLotus Contact <onboarding@resend.dev>", // later replace with your verified domain
+        to: ["contact@poplotus.in"],
+        subject: `📩 New Query: ${subject}`,
+        html: `
+          <h2>New Message from PopLotus Website</h2>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Subject:</b> ${subject}</p>
+          <p><b>Message:</b> ${message}</p>
+        `,
+        attachments,
+      }),
     });
 
-    return NextResponse.json({ success: true });
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message || "Failed to send email");
+
+    return NextResponse.json({ success: true, data });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
   }
 }
