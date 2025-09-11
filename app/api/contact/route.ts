@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "PopLotus Contact <onboarding@resend.dev>", // later replace with your verified domain
+        from: "PopLotus <contact@poplotus.co>", // later replace with your verified domain
         to: ["contact@poplotus.in"],
         subject: `📩 New Query: ${subject}`,
         html: `
