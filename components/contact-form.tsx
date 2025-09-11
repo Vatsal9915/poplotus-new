@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Upload, Phone, Mail, MapPin, Clock } from "lucide-react"
 import { useState } from "react"
+import { Resend } from 'resend';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
