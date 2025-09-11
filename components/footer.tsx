@@ -20,13 +20,16 @@ export default function Footer() {
                 rel="noopener noreferrer">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://www.instagram.com/poplotus_?igsh=azB2OWRxc28xbXl0&utm_source=qr" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.instagram.com/poplotus_?igsh=azB2OWRxc28xbXl0&utm_source=qr" className="text-gray-400 hover:text-gold transition-colors" target="_blank" 
+                 rel="noopener noreferrer">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/company/poplotus/?viewAsMember=true" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.linkedin.com/company/poplotus/?viewAsMember=true" className="text-gray-400 hover:text-gold transition-colors" target="_blank" 
+                 rel="noopener noreferrer">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://youtube.com/@poplotus-d9l?si=a4CSZo4JWYD8ahon" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://youtube.com/@poplotus-d9l?si=a4CSZo4JWYD8ahon" className="text-gray-400 hover:text-gold transition-colors" target="_blank" 
+                 rel="noopener noreferrer">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
