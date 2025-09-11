@@ -19,22 +19,9 @@ const ourProducts = [
     description:
       "Creamy and savory blend with the perfect hint of onion. A sophisticated flavor that's both comforting and exciting.",
     image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cream%20and%20onion-SVzxWBGMMqH3hi1ol4OLCFlZ2Gnlr7.png",
+      "/creamnonion.webp",
     price: 299,
     weight: "40g",
-    tags: ["New", "Popular"],
-    nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
-    category: "makhana",
-  },
-  {
-    id: "cream-onion-50g",
-    name: "Cream & Onion Makhana",
-    description:
-      "Creamy and savory blend with the perfect hint of onion. A sophisticated flavor that's both comforting and exciting.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cream%20and%20onion-SVzxWBGMMqH3hi1ol4OLCFlZ2Gnlr7.png",
-    price: 299,
-    weight: "50g",
     tags: ["New", "Popular"],
     nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
     category: "makhana",
