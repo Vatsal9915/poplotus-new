@@ -86,7 +86,7 @@ export default function ProductGrid() {
                       alt={product.name}
                       width={300}
                       height={300}
-                      className="w-full h-64 object-contain group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
