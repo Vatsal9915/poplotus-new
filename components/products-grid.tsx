@@ -85,6 +85,42 @@ const ourProducts = [
     category: "makhana",
   },
   {
+    id: "mexican-habanero-90g",
+    name: "Mexican Habanero Makhana",
+    description:
+      "Fiery, crunchy, and guilt-free, our Mexican Habanero Makhana packs a bold chili kick with a healthy twist.",
+    image: "/mexicanhabanero.webp",
+    price: 329,
+    weight: "90g",
+    tags: ["Fiery", "Blazing"],
+    nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
+    category: "makhana",
+  },
+  {
+    id: "tulsi-90g",
+    name: "Tulsi Basil Pesto Makhana",
+    description:
+      "Light, crunchy, and bursting with fresh herbal goodness, this snack blends the calming touch of tulsi with the zesty richness of basil pesto for a wholesome, guilt-free treat.",
+    image: "/tulsi.webp",
+    price: 329,
+    weight: "90g",
+    tags: ["Herby", "Fresh"],
+    nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
+    category: "makhana",
+  },
+  {
+    id: "truffle-90g",
+    name: "Truffle Oil & Parmesan Makhana",
+    description:
+      "Light, crunchy, and luxuriously flavored, this snack combines the earthy aroma of truffle oil with the rich, savory taste of parmesan for an indulgent, guilt-free treat.",
+    image: "/truffleoil.webp",
+    price: 329,
+    weight: "90g",
+    tags: ["Gourmet", "Savory"],
+    nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
+    category: "makhana",
+  },
+  {
     id: "raw-makhana-250g",
     name: "Raw Makhana",
     description: "Pure, natural lotus seeds in their original form. Perfect for home cooking or healthy snacking.",
