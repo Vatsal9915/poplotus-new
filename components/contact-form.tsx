@@ -21,27 +21,43 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState("")
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+  try {
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("email", formData.email);
+    form.append("subject", formData.subject);
+    form.append("message", formData.message);
 
-      // In a real app, this would send the form data to your backend
-      console.log("Form submitted:", { ...formData, file })
-
-      setSubmitMessage("Thank you for your message! We'll get back to you within 24 hours.")
-      setFormData({ name: "", email: "", subject: "", message: "" })
-      setFile(null)
-    } catch (error) {
-      setSubmitMessage("Something went wrong. Please try again or contact us directly.")
-    } finally {
-      setIsSubmitting(false)
-      setTimeout(() => setSubmitMessage(""), 7000)
+    if (file) {
+      form.append("file", file);
     }
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: form,
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setSubmitMessage("✅ Thank you for your message! We'll get back to you within 24 hours.");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFile(null);
+    } else {
+      setSubmitMessage("❌ Failed to send. Please try again.");
+    }
+  } catch (error) {
+    setSubmitMessage("❌ Something went wrong. Please try again later.");
+  } finally {
+    setIsSubmitting(false);
+    setTimeout(() => setSubmitMessage(""), 7000);
   }
+};
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
