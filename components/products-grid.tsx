@@ -264,7 +264,7 @@ export default function ProductsGrid() {
             alt={product.name}
             width={400}
             height={300}
-            className="w-full h-70 object-contain"
+            className="w-full h-70 object-cover"
           />
 
 
