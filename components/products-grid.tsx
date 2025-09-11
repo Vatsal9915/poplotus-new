@@ -258,15 +258,14 @@ export default function ProductsGrid() {
       className="group cursor-pointer border-0 shadow-md hover:shadow-lg transition-shadow duration-200 relative overflow-hidden"
     >
       <CardContent className="p-0">
-        <div className="w-full h-64 flex items-center justify-center bg-white">
-        <Image
-           src={product.image || "/placeholder.svg"}
-           alt={product.name}
-           width={400}
-           height={300}
-           className="max-h-full object-contain"
+        <div className="relative overflow-hidden">
+          <Image
+            src={product.image || "/placeholder.svg"}
+            alt={product.name}
+            width={400}
+            height={300}
+            className="w-full h-70 object-contain"
           />
-         </div>
 
 
           {/* Tags */}
