@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -16,16 +16,16 @@ export default function Footer() {
               nutrition.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.facebook.com/share/19DtR2XwF9/?mibextid=wwXIfr" className="text-gray-400 hover:text-gold transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.instagram.com/poplotus_?igsh=azB2OWRxc28xbXl0&utm_source=qr" className="text-gray-400 hover:text-gold transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a href="https://www.linkedin.com/company/poplotus/?viewAsMember=true" className="text-gray-400 hover:text-gold transition-colors">
+                <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://youtube.com/@poplotus-d9l?si=a4CSZo4JWYD8ahon" className="text-gray-400 hover:text-gold transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2025 PopLotus Foods Pvt. Ltd. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">© 2025 Nutralike Superfoods Pvt. Ltd. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">
                 Privacy Policy
