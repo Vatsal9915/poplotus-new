@@ -16,7 +16,8 @@ export default function Footer() {
               nutrition.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/share/19DtR2XwF9/?mibextid=wwXIfr" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.facebook.com/share/19DtR2XwF9/?mibextid=wwXIfr" className="text-gray-400 hover:text-gold transition-colors" target="_blank" 
+                rel="noopener noreferrer">
                 <Facebook className="w-5 h-5" />
               </a>
               <a href="https://www.instagram.com/poplotus_?igsh=azB2OWRxc28xbXl0&utm_source=qr" className="text-gray-400 hover:text-gold transition-colors">
