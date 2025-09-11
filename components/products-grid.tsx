@@ -544,19 +544,30 @@ export default function ProductsGrid() {
           </section>
 
           {/* Makhana Bhujiya Banner */}
-<section className="relative mb-20">
-  <div className="bg-gradient-to-r from-amber-100 to-yellow-200 rounded-2xl shadow-lg py-16 px-6 text-center">
-    <h2 className="text-4xl sm:text-5xl font-extrabold text-amber-800 drop-shadow-md">
+  <section className="relative mb-20 w-full">
+  {/* Background Image */}
+  <div 
+    className="absolute inset-0 bg-cover bg-center opacity-70"
+    style={{ backgroundImage: "url('/bhujiya.webp')" }}
+  ></div>
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Content */}
+  <div className="relative max-w-5xl mx-auto py-20 px-6 text-center">
+    <h2 className="text-5xl sm:text-6xl font-extrabold text-yellow-100 drop-shadow-xl animate-pulse">
       Makhana Bhujiya
     </h2>
-    <p className="mt-4 text-xl sm:text-2xl font-semibold text-gray-700">
-       Coming Soon!
+    <p className="mt-4 text-2xl sm:text-3xl font-semibold text-white animate-bounce">
+      Coming Soon!
     </p>
-    <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
+    <p className="mt-6 text-gray-200 max-w-3xl mx-auto text-lg sm:text-xl">
       A crunchy twist on tradition — stay tuned for our new healthy snack innovation.
     </p>
   </div>
 </section>
+
 
           {/* Call to action */}
           <div className="text-center mt-16 bg-beige/20 rounded-2xl p-12">
