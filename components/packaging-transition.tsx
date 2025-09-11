@@ -6,32 +6,32 @@ import { useEffect, useRef, useState } from "react"
 const products = [
   {
     name: "Peri Peri",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i3-eB5Y5J4ukxDJpzUigmr657K4eXCo9f.png",
+    image: "/peri.webp",
     sectionId: "peri-peri-makhana-section",
   },
   {
     name: "Himalayan Pink Salt",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i5-yfCnUf1FKI6JyNvZl1Ti8rfQtvPM0R.png",
+    image: "/pink-salt.webp",
     sectionId: "himalayan-pink-salt-section",
   },
   {
     name: "Tomato Chilli",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i6-G5SSfmcCQLIMh8IAruCOYoKGAGCTC8.png",
+    image: "/tomato.webp",
     sectionId: "tomato-chilli-makhana-section",
   },
   {
     name: "Cheese",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i1-72aI8anoTMT8WZwOhJVtgxU9gvyzHY.png",
+    image: "/cheese.webp",
     sectionId: "cheese-makhana-section",
   },
   {
     name: "Pudina",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i4-4LY6SgdDt6AvVwGIbXwWTOr783dyGX.png",
+    image: "/pudina.webp",
     sectionId: "pudina-makhana-section",
   },
   {
     name: "Cream & Onion",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/i2-1bj3SWrMkvlOez9v6yHV1V89yqcOOw.png",
+    image: "/creamnonion.webp",
     sectionId: "cream-onion-makhana-section",
   },
 ]
