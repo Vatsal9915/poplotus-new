@@ -509,7 +509,7 @@ export default function ProductsGrid() {
                 Crispy, baked makhana chips in delicious flavors. A healthier alternative to traditional chips
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {chipsProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -524,7 +524,7 @@ export default function ProductsGrid() {
                 Soft, chewy cookies made with nutritious makhana flour. Guilt-free indulgence for your sweet cravings
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {cookiesProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
