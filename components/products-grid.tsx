@@ -146,7 +146,7 @@ const ourProducts = [
     id: "chips-cheese",
     name: "Cheese Makhana Chips",
     description: "Rich and creamy cheese makhana chips that melt in your mouth with every crunchy bite.",
-    image: "/chips_cheese.png",
+    image: "/chips_cheese.jpg",
     price: 219,
     weight: "90g",
     tags: ["Cheesy", "Savory"],
