@@ -32,14 +32,14 @@ const productCategories = {
       { id: "cookies-almond", name: "Almond", caloriesPerGram: 4.7, protein: 10.1, carbs: 62.5, fat: 4.8 },
     ],
   },
-  chana: {
+  {/*chana: {
     name: "Chana Jor Garam",
     products: [
       { id: "chana-classic", name: "Classic", caloriesPerGram: 3.8, protein: 18.2, carbs: 58.5, fat: 1.2 },
       { id: "chana-spicy", name: "Spicy", caloriesPerGram: 3.9, protein: 18.5, carbs: 58.2, fat: 1.3 },
       { id: "chana-tangy", name: "Tangy", caloriesPerGram: 3.8, protein: 18.3, carbs: 58.4, fat: 1.2 },
     ],
-  },
+  },*/}
 }
 
 export default function CalorieCalculator() {
