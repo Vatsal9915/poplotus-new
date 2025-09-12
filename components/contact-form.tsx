@@ -45,14 +45,14 @@ const handleSubmit = async (e: React.FormEvent) => {
     const data = await res.json();
 
     if (data.success) {
-      setSubmitMessage("✅ Thank you for your message! We'll get back to you within 24 hours.");
+      setSubmitMessage("Thank you for your message! We'll get back to you within 24 hours.");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setFile(null);
     } else {
-      setSubmitMessage("❌ Failed to send. Please try again.");
+      setSubmitMessage("Failed to send. Please try again.");
     }
   } catch (error) {
-    setSubmitMessage("❌ Something went wrong. Please try again later.");
+    setSubmitMessage("Something went wrong. Please try again later.");
   } finally {
     setIsSubmitting(false);
     setTimeout(() => setSubmitMessage(""), 7000);
