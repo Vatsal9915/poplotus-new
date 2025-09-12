@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         from: "PopLotus <contact@poplotus.co>", // later replace with your verified domain
-        to: ["contact@poplotus.in"],
+        to: ["sales@poplotus.in"],
         subject: `📩 New Query: ${subject}`,
         html: `
           <h2>New Message from PopLotus Website</h2>
