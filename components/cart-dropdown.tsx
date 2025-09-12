@@ -8,33 +8,33 @@ const sampleProducts = [
   {
     id: "sample-peri-peri",
     name: "Peri Peri Sample",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/peri%20peri-sUMcH4ffBIoMgwa2evuhtS4WOeCa4u.png",
+    image: "/peri.webp",
   },
   {
     id: "sample-cheese",
     name: "Cheese Sample",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cheese-69eadAxMyEzZKS89eKZqvYJByKbFg5.png",
+    image: "/cheese.webp",
   },
   {
     id: "sample-pudina",
     name: "Pudina Sample",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pudina-NHvMkswWqum1so9v41bDNLzOAHpM6F.png",
+    image: "/pudina.webp",
   },
   {
     id: "sample-pink-salt",
     name: "Pink Salt Sample",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pink%20salt-74XlnWSRXCYUzhNJAXB9hNsz93voyA.png",
+    image: "/pink-salt.webp",
   },
   {
     id: "sample-tomato-chilli",
     name: "Tomato Chilli Sample",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tomato%20chilli-qMZ2ZsZOUGPqwq0C47V50pZxQVZjqq.png",
+    image: "/tomato.webp",
   },
   {
     id: "sample-cream-onion",
     name: "Cream & Onion Sample",
     image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cream%20and%20onion-SVzxWBGMMqH3hi1ol4OLCFlZ2Gnlr7.png",
+      "/creamnonion.webp",
   },
 ]
 
