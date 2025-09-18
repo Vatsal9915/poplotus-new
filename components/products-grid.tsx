@@ -73,18 +73,6 @@ const ourProducts = [
     category: "makhana",
   },
   {
-    id: "peri-peri-90g",
-    name: "Peri Peri Makhana",
-    description:
-      "Fiery peri peri spices for those who love heat. An intense flavor journey that's absolutely addictive.",
-    image: "/peri.webp",
-    price: 329,
-    weight: "90g",
-    tags: ["Hot", "Spicy"],
-    nutritionHighlights: ["Low Fat", "High Protein", "Gluten Free"],
-    category: "makhana",
-  },
-  {
     id: "mexican-habanero-90g",
     name: "Mexican Habanero Makhana",
     description:
