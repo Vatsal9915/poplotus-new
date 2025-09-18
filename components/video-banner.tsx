@@ -5,9 +5,9 @@ import Link from "next/link"
 
 export default function VideoBanner() {
   return (
-    <section className="relative w-full h-[50vh] sm:h-[70vh] lg:h-screen bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden">
+    <section className="relative w-full h-[50vh] sm:h-[70vh] lg:h-screen bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden pt-16">
       {/* Video Background */}
-      <div className="absolute inset-5 0 0 0">
+      <div className="absolute inset-0">
         <video
           autoPlay
           muted
