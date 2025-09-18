@@ -201,7 +201,7 @@ const ourProducts = [
     id: "cookies-chocolate-100g",
     name: "Chocolate Makhana Cookies",
     description: "Rich chocolate cookies with makhana flour. Indulgent taste with nutritious benefits.",
-    image: "/cookies_chocolate.webp",
+    image: "/new_cookies_chocolate.webp",
     price: 329,
     weight: "100g",
     tags: ["Chocolate", "Indulgent"],
