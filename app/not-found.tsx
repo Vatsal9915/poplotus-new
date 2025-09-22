@@ -5,29 +5,25 @@ import { motion } from "framer-motion";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden text-center px-6">
-      {/* Floating Mascots */}
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-yellow-50 to-yellow-100 text-center px-6 relative overflow-hidden">
+      {/* Floating Golden Circles */}
       <motion.div
-        className="absolute top-20 left-10 text-6xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-      >
-        🌸
-      </motion.div>
-      <motion.div
-        className="absolute top-32 right-16 text-6xl"
-        animate={{ y: [0, 25, 0] }}
+        className="absolute top-20 left-12 w-16 h-16 bg-yellow-300 rounded-full opacity-70 blur-lg"
+        animate={{ y: [0, -30, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-      >
-        🍿
-      </motion.div>
+      />
+      <motion.div
+        className="absolute bottom-28 right-16 w-20 h-20 bg-yellow-400 rounded-full opacity-50 blur-lg"
+        animate={{ y: [0, 40, 0] }}
+        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+      />
 
-      {/* 404 Animation */}
+      {/* 404 Text */}
       <motion.h1
-        className="text-8xl font-extrabold text-orange-600 drop-shadow-lg"
+        className="text-8xl font-extrabold text-yellow-600 drop-shadow-lg"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 15 }}
+        transition={{ type: "spring", stiffness: 120, damping: 15 }}
       >
         404
       </motion.h1>
@@ -38,7 +34,7 @@ export default function NotFound() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        Oops! Page Not Found
+        Page Not Found
       </motion.h2>
 
       <motion.p
@@ -47,9 +43,8 @@ export default function NotFound() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        Looks like this page got lost while snacking on{" "}
-        <b>PopLotus makhanas</b> 🍿.  
-        Don’t worry, Poppy & Poppus will guide you home.
+        The golden path you are looking for doesn’t exist ✨.  
+        Let’s get you back home.
       </motion.p>
 
       {/* Button */}
@@ -59,7 +54,7 @@ export default function NotFound() {
         whileTap={{ scale: 0.95 }}
       >
         <Link href="/">
-          <button className="px-6 py-3 text-lg bg-orange-500 hover:bg-orange-600 text-white rounded-2xl shadow-lg transition">
+          <button className="px-6 py-3 text-lg bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-2xl shadow-lg transition">
             Go Home
           </button>
         </Link>
