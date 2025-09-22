@@ -21,7 +21,7 @@ const processSteps = [
   {
     title: "Packaging",
     description: "Eco-friendly packaging to preserve freshness",
-    image: "/eco-friendly-snacks.png",
+    image: "/packaging_bts.webp",
   },
 ]
 
