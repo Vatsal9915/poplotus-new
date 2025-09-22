@@ -26,7 +26,7 @@ export default function SuperfoodSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-amber-900 tracking-wide">WHOLESOME SNACKING</h2>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-amber-900 tracking-wide">WHOLESOME SNACKING</h1>
         </div>
 
         {/* Three Pillars */}
