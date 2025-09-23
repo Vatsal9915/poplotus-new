@@ -7,7 +7,7 @@ export default function VideoBanner() {
   return (
     <section className="relative w-full h-[50vh] sm:h-[70vh] lg:h-screen bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden pt-16">
       {/* Video Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 top-16">
         <video
           autoPlay
           muted
