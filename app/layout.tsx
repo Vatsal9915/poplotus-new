@@ -5,6 +5,7 @@ import "./globals.css"
 import { CartProvider } from "@/components/cart-context"
 import { WishlistProvider } from "@/components/wishlist-context"
 import CartNotification from "@/components/cart-notification"
+import Script from "next/script"   
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -45,6 +46,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QW5WMNW5P9"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QW5WMNW5P9');
+          `}
+        </Script>
+      </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         <WishlistProvider>
           <CartProvider>
