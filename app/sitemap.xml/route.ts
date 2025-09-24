@@ -45,8 +45,8 @@ export async function GET() {
   return new NextResponse(sitemap, {
     status: 200,
     headers: {
-      "Content-Type": "application/xml; charset=utf-8",  // ✅ must be XML
-      "Cache-Control": "public, s-maxage=600, stale-while-revalidate=300", // ✅ helps on Vercel
+      "Content-Type": "application/xml",  // ✅ Important
+      "Cache-Control": "no-cache",        // ✅ disables 304 for testing
     },
   });
 }
