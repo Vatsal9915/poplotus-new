@@ -60,6 +60,7 @@ export default function RootLayout({
             gtag('config', 'G-QW5WMNW5P9');
           `}
         </Script>
+        <meta name="google-site-verification" content="4A9KC_lZupMLaBOLO_2eYvSBGWcxlaadA4zwfCnKB-g" />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         <WishlistProvider>
