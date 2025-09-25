@@ -349,5 +349,5 @@ export default function BlogGrid() {
       
       <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
       </>
-    )
+    }
 
