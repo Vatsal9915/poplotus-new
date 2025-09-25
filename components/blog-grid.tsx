@@ -23,14 +23,14 @@ const blogPosts = [
     tags: ["Dessert", "Traditional", "Healthy"],
     date: "March 15, 2024",
     fullIngredients: [
-      "1 cup PopLotus Raw Makhana",
-      "4 cups whole milk",
-      "1/2 cup sugar (adjust to taste)",
-      "1/4 cup chopped almonds",
-      "1/4 cup chopped pistachios",
-      "1/2 tsp cardamom powder",
+      "**1 cup** PopLotus Raw Makhana",
+      "**4 cups** whole milk",
+      "**1/2 cup** sugar (adjust to taste)",
+      "**1/4 cup** chopped almonds",
+      "**1/4 cup** chopped pistachios",
+      "**1/2 tsp** cardamom powder",
       "A pinch of saffron",
-      "2 tbsp ghee",
+      "**2 tbsp** ghee",
     ],
     fullInstructions: [
       "Heat ghee in a heavy-bottomed pan and roast the makhana until crispy. Set aside.",
@@ -38,7 +38,7 @@ const blogPosts = [
       "Add the roasted makhana to the milk and cook for 15 minutes until soft.",
       "Add sugar, cardamom powder, and saffron. Mix well.",
       "Garnish with chopped nuts and serve hot or chilled.",
-      "Optional: Blend half the mixture for a creamier texture.",
+      "**Optional:** Blend half the mixture for a creamier texture.",
     ],
   },
   {
@@ -54,25 +54,32 @@ const blogPosts = [
     fullContent: `
       Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
 
-      **Rich in Protein and Low in Calories**
+      ### Rich in Protein and Low in Calories
       
-      One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately 9.7g of protein while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
+      One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately **9.7g of protein** while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
 
-      **Packed with Essential Minerals**
+      ### Packed with Essential Minerals
       
       Makhana is rich in calcium, magnesium, iron, and phosphorus. The calcium content is particularly impressive, making it beneficial for bone health. The magnesium helps in maintaining heart health and regulating blood pressure.
 
-      **Antioxidant Properties**
+      ### Antioxidant Properties
       
       These lotus seeds contain flavonoids and other antioxidants that help fight free radicals in the body, potentially reducing the risk of chronic diseases and supporting overall health.
 
-      **Digestive Health Benefits**
+      ### Digestive Health Benefits
       
       The fiber content in makhana aids digestion and helps maintain gut health. It's also easy to digest, making it suitable for people with sensitive stomachs.
 
-      **Heart Health Support**
+      ### Heart Health Support
       
       The low sodium and high potassium content makes makhana heart-friendly. Regular consumption may help in maintaining healthy blood pressure levels.
+
+      **Key Takeaways:**
+      *   Excellent source of plant-based protein.
+      *   Rich in essential minerals like calcium and magnesium.
+      *   Contains beneficial antioxidants.
+      *   Supports digestive and heart health.
+      *   A versatile and healthy snack option.
     `,
   },
   {
@@ -88,14 +95,14 @@ const blogPosts = [
     tags: ["Snack", "Street Food", "Spicy"],
     date: "March 10, 2024",
     fullIngredients: [
-      "2 cups PopLotus Roasted Makhana",
-      "1/2 cup finely chopped onion",
-      "1/2 cup finely chopped tomato",
-      "1/4 cup finely chopped cucumber",
-      "2 tbsp green chutney",
-      "2 tbsp tamarind chutney",
-      "1 tbsp lemon juice",
-      "1/2 tsp chaat masala",
+      "**2 cups** PopLotus Roasted Makhana",
+      "**1/2 cup** finely chopped onion",
+      "**1/2 cup** finely chopped tomato",
+      "**1/4 cup** finely chopped cucumber",
+      "**2 tbsp** green chutney",
+      "**2 tbsp** tamarind chutney",
+      "**1 tbsp** lemon juice",
+      "**1/2 tsp** chaat masala",
       "Salt to taste",
       "Fresh coriander for garnish",
     ],
@@ -104,6 +111,7 @@ const blogPosts = [
       "Add green chutney, tamarind chutney, lemon juice, chaat masala, and salt.",
       "Mix everything gently until well combined.",
       "Garnish with fresh coriander and serve immediately.",
+      "**Pro Tip:** For extra crunch, add some crushed papdi or sev.",
     ],
   },
   {
@@ -119,21 +127,27 @@ const blogPosts = [
     fullContent: `
       Makhana, or foxnuts, have a rich history deeply intertwined with Indian culture and traditional medicine. For thousands of years, these humble lotus seeds have been revered not just for their taste but also for their medicinal properties.
 
-      **Origins in Ancient India**
+      ### Origins in Ancient India
       
       The cultivation of makhana dates back to ancient times in the wetlands of Bihar, India, which remains the largest producer globally. Historical texts and Ayurvedic scriptures mention makhana as a valuable food source and a potent ingredient in traditional remedies.
 
-      **Ayurvedic Significance**
+      ### Ayurvedic Significance
       
       In Ayurveda, makhana is known as 'phool makhana' and is highly regarded for its cooling properties and nutritional value. It's often recommended for various ailments, including digestive issues, kidney problems, and general weakness. It's considered a sattvic food, promoting purity and balance.
 
-      **Cultural and Religious Importance**
+      ### Cultural and Religious Importance
       
       Makhana holds significant cultural and religious importance in India. It's frequently used in religious ceremonies, offerings to deities, and as a fasting food due to its purity and nutritional benefits. During festivals like Navratri, makhana is a staple snack.
 
-      **Modern Revival**
+      ### Modern Revival
       
       In recent decades, makhana has seen a resurgence in popularity as a healthy snack alternative globally. Its gluten-free, low-calorie, and nutrient-rich profile makes it a favorite among health-conscious consumers. PopLotus is proud to continue this ancient tradition by bringing you premium quality makhana.
+
+      **Historical Highlights:**
+      *   **Ancient Times:** Cultivation began in Bihar, India.
+      *   **Ayurveda:** Valued for medicinal properties and nutritional benefits.
+      *   **Religious Use:** Integral to ceremonies and fasting.
+      *   **Global Popularity:** Resurgence as a healthy snack.
     `,
   },
   {
@@ -149,17 +163,17 @@ const blogPosts = [
     tags: ["Energy", "No-Bake", "Healthy"],
     date: "March 5, 2024",
     fullIngredients: [
-      "1 cup PopLotus Roasted Makhana, crushed",
-      "1/2 cup dates, pitted and chopped",
-      "1/4 cup cocoa powder",
-      "2 tbsp almond butter",
-      "1 tbsp honey or maple syrup (optional)",
+      "**1 cup** PopLotus Roasted Makhana, crushed",
+      "**1/2 cup** dates, pitted and chopped",
+      "**1/4 cup** cocoa powder",
+      "**2 tbsp** almond butter",
+      "**1 tbsp** honey or maple syrup (optional)",
       "A pinch of salt",
       "Desiccated coconut for coating (optional)",
     ],
     fullInstructions: [
       "In a food processor, combine crushed makhana, dates, cocoa powder, almond butter, and salt.",
-      "Blend until the mixture comes together and forms a sticky dough. If too dry, add honey/maple syrup.",
+      "Blend until the mixture comes together and forms a sticky dough. If too dry, add honey or maple syrup.",
       "Roll the mixture into small, bite-sized balls.",
       "Optionally, roll the energy balls in desiccated coconut.",
       "Refrigerate for 30 minutes to firm up before serving.",
@@ -178,53 +192,29 @@ const blogPosts = [
     fullContent: `
       At PopLotus, we believe that healthy snacking shouldn't come at the expense of our planet. Our commitment to sustainability is at the core of everything we do, from sourcing our premium makhana to our eco-friendly packaging.
 
-      **Ethical Sourcing**
+      ### Ethical Sourcing
       
       We work directly with local farmers who practice sustainable cultivation methods, ensuring fair wages and minimal environmental impact. Our makhana is grown without harmful pesticides, preserving biodiversity and soil health.
 
-      **Eco-Friendly Packaging**
+      ### Eco-Friendly Packaging
       
       We are constantly innovating to reduce our carbon footprint. Our packaging is designed to be recyclable and, wherever possible, made from recycled materials. We aim to eliminate single-use plastics and promote a circular economy.
 
-      **Waste Reduction**
+      ### Waste Reduction
       
       Our production processes are optimized to minimize waste. We strive for efficiency at every step, from harvesting to packaging, ensuring that resources are used responsibly.
 
-      **Community Engagement**
+      ### Community Engagement
       
       We actively engage with our local communities to promote environmental awareness and support initiatives that protect our natural resources. We believe in giving back and fostering a culture of sustainability.
 
       Join us on our journey towards a healthier planet, one delicious and sustainable snack at a time.
-    `,
-  },
-  {
-    id: 7,
-    type: "article",
-    title: "The Ancient Superfood: History of Makhana",
-    excerpt: "Journey through time to discover how lotus seeds became one of India's most cherished healthy snacks.",
-    image: "/makhana-history.png",
-    author: "Historian Maya Patel",
-    readTime: "12 min",
-    tags: ["History", "Culture", "Traditional"],
-    date: "March 8, 2024",
-    fullContent: `
 
-      <b>Introduction: The Rise of a Superfood<b>
-      
-      Move over quinoa and chia seeds — there’s a new superfood making waves across the globe:<b>Makhana<b> (also called foxnuts or lotus seeds). Once known only in Indian households, makhana is now becoming a <b>global health sensation<b> thanks to its <b>nutritional power, versatility, and guilt-free snacking appeal.<b>
-
-      At PopLotus, we believe that snacking should be both <b>tasty and healthy<b>, and makhana checks both boxes effortlessly. But why exactly is the world switching to makhana? Let’s dive in.
-      <b>What Makes Makhana a Superfood?<b>
-      
-      In Ayurveda, makhana is known as 'phool makhana' and is highly regarded for its cooling properties and nutritional value. It's often recommended for various ailments, including digestive issues, kidney problems, and general weakness. It's considered a sattvic food, promoting purity and balance.
-
-      **Cultural and Religious Importance**
-      
-      Makhana holds significant cultural and religious importance in India. It's frequently used in religious ceremonies, offerings to deities, and as a fasting food due to its purity and nutritional benefits. During festivals like Navratri, makhana is a staple snack.
-
-      **Modern Revival**
-      
-      In recent decades, makhana has seen a resurgence in popularity as a healthy snack alternative globally. Its gluten-free, low-calorie, and nutrient-rich profile makes it a favorite among health-conscious consumers. PopLotus is proud to continue this ancient tradition by bringing you premium quality makhana.
+      **Our Sustainable Practices Include:**
+      *   **Direct Farmer Partnerships:** Ensuring fair trade and sustainable farming.
+      *   **Recyclable Materials:** Prioritizing eco-friendly packaging.
+      *   **Minimized Waste:** Optimizing production for efficiency.
+      *   **Local Initiatives:** Supporting environmental protection efforts.
     `,
   },
 ]
@@ -262,7 +252,7 @@ export default function BlogGrid() {
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <Image
-                      src={post.image || "/placeholder.svg?height=250&width=400"}
+                      src={post.image || "/placeholder.svg?height=250&width=400\""}
                       alt={post.title}
                       width={400}
                       height={250}
@@ -358,6 +348,8 @@ export default function BlogGrid() {
 
       {/* Blog content popup */}
       <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
-    </>
-  )
-}
+<Thinking>
+I have now successfully read both `components/blog-content-popup.tsx` and `components/blog-grid.tsx`.
+
+**Current State:**
+*\
