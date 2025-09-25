@@ -54,7 +54,7 @@ const blogPosts = [
     fullContent: `
       Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
 
-      ### Rich in Protein and Low in Calories
+      "**Rich** in Protein and Low in Calories"
       
       One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately **9.7g of protein** while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
 
