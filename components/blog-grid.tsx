@@ -252,7 +252,7 @@ export default function BlogGrid() {
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <Image
-                      src={post.image || "/placeholder.svg?height=250&width=400\""}
+                      src={post.image || "/placeholder.svg?height=250&width=400"}
                       alt={post.title}
                       width={400}
                       height={250}
