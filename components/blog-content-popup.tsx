@@ -4,6 +4,8 @@ import { X, Clock, User, ChefHat, BookOpen, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 interface BlogContentPopupProps {
   post: any
@@ -15,7 +17,6 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
   if (!isOpen || !post) return null
 
   const handleShare = async () => {
-    // Made function async to await clipboard write
     const shareData = {
       title: post.title,
       text: post.excerpt,
@@ -24,16 +25,16 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
 
     if (navigator.share) {
       try {
-        await navigator.share(shareData) // Await navigator.share
-        console.log("Content shared successfully")
+        await navigator.share(shareData)
+        console.log("[v0] Content shared successfully")
       } catch (error) {
-        console.error("Error sharing via navigator.share:", error)
+        console.error("[v0] Error sharing via navigator.share:", error)
         try {
           await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
           alert("Link copied to clipboard!")
           console.log("[v0] Link copied to clipboard as fallback.")
         } catch (clipboardError) {
-          console.error("Error copying to clipboard:", clipboardError)
+          console.error("[v0] Error copying to clipboard:", clipboardError)
           alert("Failed to share or copy link.")
         }
       }
@@ -41,9 +42,9 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
       try {
         await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
         alert("Link copied to clipboard!")
-        console.log("Link copied to clipboard (navigator.share not supported).")
+        console.log("[v0] Link copied to clipboard (navigator.share not supported).")
       } catch (clipboardError) {
-        console.error("Error copying to clipboard:", clipboardError)
+        console.error("[v0] Error copying to clipboard:", clipboardError)
         alert("Failed to copy link to clipboard.")
       }
     }
@@ -51,7 +52,6 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
 
   const handleShopIngredients = () => {
     alert("Shop Ingredients functionality will be implemented here!")
-    // Example: Redirect to a shop page or add items to cart
     // window.location.href = '/products';
   }
 
@@ -130,7 +130,17 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                     {post.fullIngredients.map((ingredient: string, index: number) => (
                       <li key={index} className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-gold rounded-full flex-shrink-0" />
-                        <span className="text-gray-700">{ingredient}</span>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            p: ({ node, ...props }) => <span {...props} className="text-gray-700" />,
+                            strong: ({ node, ...props }) => (
+                              <strong className="font-semibold text-gray-900" {...props} />
+                            ),
+                          }}
+                        >
+                          {ingredient}
+                        </ReactMarkdown>
                       </li>
                     ))}
                   </ul>
@@ -144,7 +154,17 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                         <div className="w-8 h-8 bg-gold text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">
                           {index + 1}
                         </div>
-                        <p className="text-gray-700 leading-relaxed pt-1">{instruction}</p>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed pt-1" {...props} />,
+                            strong: ({ node, ...props }) => (
+                              <strong className="font-semibold text-gray-900" {...props} />
+                            ),
+                          }}
+                        >
+                          {instruction}
+                        </ReactMarkdown>
                       </li>
                     ))}
                   </ol>
@@ -152,7 +172,23 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
               </div>
             ) : (
               <div className="prose prose-lg max-w-none">
-                <div className="text-gray-700 leading-relaxed whitespace-pre-line">{post.fullContent}</div>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-4" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mb-3" {...props} />,
+                    h3: ({ node, ...props }) => <h3 className="text-xl font-bold mb-2" {...props} />,
+                    p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
+                    ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 mb-4" {...props} />,
+                    ol: ({ node, ...props }) => <ol className="list-decimal list-inside space-y-2 mb-4" {...props} />,
+                    li: ({ node, ...props }) => <li className="text-gray-700" {...props} />,
+                    strong: ({ node, ...props }) => <strong className="font-semibold text-gray-900" {...props} />,
+                    em: ({ node, ...props }) => <em className="italic" {...props} />,
+                    a: ({ node, ...props }) => <a className="text-gold hover:underline" {...props} />,
+                  }}
+                >
+                  {post.fullContent}
+                </ReactMarkdown>
               </div>
             )}
 
