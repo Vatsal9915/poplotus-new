@@ -14,21 +14,38 @@ interface BlogContentPopupProps {
 export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentPopupProps) {
   if (!isOpen || !post) return null
 
-  const handleShare = () => {
+  const handleShare = async () => {
+    // Made function async to await clipboard write
+    const shareData = {
+      title: post.title,
+      text: post.excerpt,
+      url: window.location.href,
+    }
+
     if (navigator.share) {
-      navigator
-        .share({
-          title: post.title,
-          text: post.excerpt,
-          url: window.location.href, // Shares the current URL of the page
-        })
-        .catch((error) => console.error("Error sharing:", error))
+      try {
+        await navigator.share(shareData) // Await navigator.share
+        console.log("Content shared successfully")
+      } catch (error) {
+        console.error("Error sharing via navigator.share:", error)
+        try {
+          await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
+          alert("Link copied to clipboard!")
+          console.log("[v0] Link copied to clipboard as fallback.")
+        } catch (clipboardError) {
+          console.error("Error copying to clipboard:", clipboardError)
+          alert("Failed to share or copy link.")
+        }
+      }
     } else {
-      // Fallback for browsers that don't support navigator.share
-      navigator.clipboard
-        .writeText(`${post.title} - ${post.excerpt} ${window.location.href}`)
-        .then(() => alert("Link copied to clipboard!"))
-        .catch((error) => console.error("Error copying to clipboard:", error))
+      try {
+        await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
+        alert("Link copied to clipboard!")
+        console.log("Link copied to clipboard (navigator.share not supported).")
+      } catch (clipboardError) {
+        console.error("Error copying to clipboard:", clipboardError)
+        alert("Failed to copy link to clipboard.")
+      }
     }
   }
 
