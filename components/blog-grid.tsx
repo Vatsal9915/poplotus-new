@@ -21,31 +21,90 @@ const blogPosts = [
     cookTime: "30 min",
     difficulty: "Easy",
     tags: ["Dessert", "Traditional", "Healthy"],
-    date: "March 15, 2025",
+    date: "March 15, 2024",
+    fullIngredients: [
+      "1 cup PopLotus Raw Makhana",
+      "4 cups whole milk",
+      "1/2 cup sugar (adjust to taste)",
+      "1/4 cup chopped almonds",
+      "1/4 cup chopped pistachios",
+      "1/2 tsp cardamom powder",
+      "A pinch of saffron",
+      "2 tbsp ghee",
+    ],
+    fullInstructions: [
+      "Heat ghee in a heavy-bottomed pan and roast the makhana until crispy. Set aside.",
+      "In the same pan, bring milk to a boil and simmer for 10 minutes.",
+      "Add the roasted makhana to the milk and cook for 15 minutes until soft.",
+      "Add sugar, cardamom powder, and saffron. Mix well.",
+      "Garnish with chopped nuts and serve hot or chilled.",
+      "Optional: Blend half the mixture for a creamier texture.",
+    ],
   },
   {
     id: 2,
     type: "article",
     title: "5 Health Benefits of Makhana You Didn't Know",
     excerpt: "Discover the amazing nutritional properties of foxnuts and why they should be part of your daily diet.",
-    image: "/makhana-benefits.png",
+    image: "/health-benefits-makhana.png",
     author: "Dr. Anjali Sharma",
     readTime: "8 min",
     tags: ["Health", "Nutrition", "Wellness"],
-    date: "March 12, 2025",
+    date: "March 12, 2024",
+    fullContent: `
+      Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
+
+      **Rich in Protein and Low in Calories**
+      
+      One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately 9.7g of protein while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
+
+      **Packed with Essential Minerals**
+      
+      Makhana is rich in calcium, magnesium, iron, and phosphorus. The calcium content is particularly impressive, making it beneficial for bone health. The magnesium helps in maintaining heart health and regulating blood pressure.
+
+      **Antioxidant Properties**
+      
+      These lotus seeds contain flavonoids and other antioxidants that help fight free radicals in the body, potentially reducing the risk of chronic diseases and supporting overall health.
+
+      **Digestive Health Benefits**
+      
+      The fiber content in makhana aids digestion and helps maintain gut health. It's also easy to digest, making it suitable for people with sensitive stomachs.
+
+      **Heart Health Support**
+      
+      The low sodium and high potassium content makes makhana heart-friendly. Regular consumption may help in maintaining healthy blood pressure levels.
+    `,
   },
   {
     id: 3,
     type: "recipe",
     title: "Spicy Makhana Chaat",
     excerpt: "A delicious street-food inspired recipe that combines the crunch of makhana with tangy chutneys.",
-    image: "/salted-makhana.png",
+    image: "/makhana-chaat.png",
     author: "Chef Rajesh",
     readTime: "10 min",
     cookTime: "20 min",
     difficulty: "Medium",
     tags: ["Snack", "Street Food", "Spicy"],
-    date: "March 10, 2025",
+    date: "March 10, 2024",
+    fullIngredients: [
+      "2 cups PopLotus Roasted Makhana",
+      "1/2 cup finely chopped onion",
+      "1/2 cup finely chopped tomato",
+      "1/4 cup finely chopped cucumber",
+      "2 tbsp green chutney",
+      "2 tbsp tamarind chutney",
+      "1 tbsp lemon juice",
+      "1/2 tsp chaat masala",
+      "Salt to taste",
+      "Fresh coriander for garnish",
+    ],
+    fullInstructions: [
+      "In a large bowl, combine roasted makhana, onion, tomato, and cucumber.",
+      "Add green chutney, tamarind chutney, lemon juice, chaat masala, and salt.",
+      "Mix everything gently until well combined.",
+      "Garnish with fresh coriander and serve immediately.",
+    ],
   },
   {
     id: 4,
@@ -56,31 +115,87 @@ const blogPosts = [
     author: "Historian Maya Patel",
     readTime: "12 min",
     tags: ["History", "Culture", "Traditional"],
-    date: "March 8, 2025",
+    date: "March 8, 2024",
+    fullContent: `
+      Makhana, or foxnuts, have a rich history deeply intertwined with Indian culture and traditional medicine. For thousands of years, these humble lotus seeds have been revered not just for their taste but also for their medicinal properties.
+
+      **Origins in Ancient India**
+      
+      The cultivation of makhana dates back to ancient times in the wetlands of Bihar, India, which remains the largest producer globally. Historical texts and Ayurvedic scriptures mention makhana as a valuable food source and a potent ingredient in traditional remedies.
+
+      **Ayurvedic Significance**
+      
+      In Ayurveda, makhana is known as 'phool makhana' and is highly regarded for its cooling properties and nutritional value. It's often recommended for various ailments, including digestive issues, kidney problems, and general weakness. It's considered a sattvic food, promoting purity and balance.
+
+      **Cultural and Religious Importance**
+      
+      Makhana holds significant cultural and religious importance in India. It's frequently used in religious ceremonies, offerings to deities, and as a fasting food due to its purity and nutritional benefits. During festivals like Navratri, makhana is a staple snack.
+
+      **Modern Revival**
+      
+      In recent decades, makhana has seen a resurgence in popularity as a healthy snack alternative globally. Its gluten-free, low-calorie, and nutrient-rich profile makes it a favorite among health-conscious consumers. PopLotus is proud to continue this ancient tradition by bringing you premium quality makhana.
+    `,
   },
   {
     id: 5,
     type: "recipe",
     title: "Chocolate Makhana Energy Balls",
     excerpt: "No-bake energy balls that combine the goodness of makhana with rich chocolate flavor.",
-    image: "/chocolate-makhana.png",
+    image: "/chocolate-energy-balls.png",
     author: "Nutritionist Kavya",
     readTime: "5 min",
     cookTime: "15 min",
     difficulty: "Easy",
     tags: ["Energy", "No-Bake", "Healthy"],
-    date: "March 5, 2025",
+    date: "March 5, 2024",
+    fullIngredients: [
+      "1 cup PopLotus Roasted Makhana, crushed",
+      "1/2 cup dates, pitted and chopped",
+      "1/4 cup cocoa powder",
+      "2 tbsp almond butter",
+      "1 tbsp honey or maple syrup (optional)",
+      "A pinch of salt",
+      "Desiccated coconut for coating (optional)",
+    ],
+    fullInstructions: [
+      "In a food processor, combine crushed makhana, dates, cocoa powder, almond butter, and salt.",
+      "Blend until the mixture comes together and forms a sticky dough. If too dry, add honey/maple syrup.",
+      "Roll the mixture into small, bite-sized balls.",
+      "Optionally, roll the energy balls in desiccated coconut.",
+      "Refrigerate for 30 minutes to firm up before serving.",
+    ],
   },
   {
     id: 6,
     type: "article",
     title: "Sustainable Snacking: Our Environmental Commitment",
     excerpt: "Learn about PopLotus's journey towards sustainable packaging and eco-friendly practices.",
-    image: "/sustainability.png",
+    image: "/sustainability-article.png",
     author: "Sustainability Team",
     readTime: "6 min",
     tags: ["Sustainability", "Environment", "Corporate"],
-    date: "March 3, 2025",
+    date: "March 3, 2024",
+    fullContent: `
+      At PopLotus, we believe that healthy snacking shouldn't come at the expense of our planet. Our commitment to sustainability is at the core of everything we do, from sourcing our premium makhana to our eco-friendly packaging.
+
+      **Ethical Sourcing**
+      
+      We work directly with local farmers who practice sustainable cultivation methods, ensuring fair wages and minimal environmental impact. Our makhana is grown without harmful pesticides, preserving biodiversity and soil health.
+
+      **Eco-Friendly Packaging**
+      
+      We are constantly innovating to reduce our carbon footprint. Our packaging is designed to be recyclable and, wherever possible, made from recycled materials. We aim to eliminate single-use plastics and promote a circular economy.
+
+      **Waste Reduction**
+      
+      Our production processes are optimized to minimize waste. We strive for efficiency at every step, from harvesting to packaging, ensuring that resources are used responsibly.
+
+      **Community Engagement**
+      
+      We actively engage with our local communities to promote environmental awareness and support initiatives that protect our natural resources. We believe in giving back and fostering a culture of sustainability.
+
+      Join us on our journey towards a healthier planet, one delicious and sustainable snack at a time.
+    `,
   },
 ]
 
