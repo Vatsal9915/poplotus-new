@@ -197,6 +197,36 @@ const blogPosts = [
       Join us on our journey towards a healthier planet, one delicious and sustainable snack at a time.
     `,
   },
+  {
+    id: 7,
+    type: "article",
+    title: "The Ancient Superfood: History of Makhana",
+    excerpt: "Journey through time to discover how lotus seeds became one of India's most cherished healthy snacks.",
+    image: "/makhana-history.png",
+    author: "Historian Maya Patel",
+    readTime: "12 min",
+    tags: ["History", "Culture", "Traditional"],
+    date: "March 8, 2024",
+    fullContent: `
+
+      <b>Introduction: The Rise of a Superfood<b>
+      
+      Move over quinoa and chia seeds — there’s a new superfood making waves across the globe:<b>Makhana<b> (also called foxnuts or lotus seeds). Once known only in Indian households, makhana is now becoming a <b>global health sensation<b> thanks to its <b>nutritional power, versatility, and guilt-free snacking appeal.<b>
+
+      At PopLotus, we believe that snacking should be both <b>tasty and healthy<b>, and makhana checks both boxes effortlessly. But why exactly is the world switching to makhana? Let’s dive in.
+      <b>What Makes Makhana a Superfood?<b>
+      
+      In Ayurveda, makhana is known as 'phool makhana' and is highly regarded for its cooling properties and nutritional value. It's often recommended for various ailments, including digestive issues, kidney problems, and general weakness. It's considered a sattvic food, promoting purity and balance.
+
+      **Cultural and Religious Importance**
+      
+      Makhana holds significant cultural and religious importance in India. It's frequently used in religious ceremonies, offerings to deities, and as a fasting food due to its purity and nutritional benefits. During festivals like Navratri, makhana is a staple snack.
+
+      **Modern Revival**
+      
+      In recent decades, makhana has seen a resurgence in popularity as a healthy snack alternative globally. Its gluten-free, low-calorie, and nutrient-rich profile makes it a favorite among health-conscious consumers. PopLotus is proud to continue this ancient tradition by bringing you premium quality makhana.
+    `,
+  },
 ]
 
 export default function BlogGrid() {
