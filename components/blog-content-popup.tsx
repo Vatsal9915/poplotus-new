@@ -26,15 +26,15 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
     if (navigator.share) {
       try {
         await navigator.share(shareData)
-        console.log("[v0] Content shared successfully")
+        console.log("Content shared successfully")
       } catch (error) {
-        console.error("[v0] Error sharing via navigator.share:", error)
+        console.error("Error sharing via navigator.share:", error)
         try {
           await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
           alert("Link copied to clipboard!")
-          console.log("[v0] Link copied to clipboard as fallback.")
+          console.log("Link copied to clipboard as fallback.")
         } catch (clipboardError) {
-          console.error("[v0] Error copying to clipboard:", clipboardError)
+          console.error("Error copying to clipboard:", clipboardError)
           alert("Failed to share or copy link.")
         }
       }
@@ -42,9 +42,9 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
       try {
         await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
         alert("Link copied to clipboard!")
-        console.log("[v0] Link copied to clipboard (navigator.share not supported).")
+        console.log("Link copied to clipboard (navigator.share not supported).")
       } catch (clipboardError) {
-        console.error("[v0] Error copying to clipboard:", clipboardError)
+        console.error("Error copying to clipboard:", clipboardError)
         alert("Failed to copy link to clipboard.")
       }
     }
