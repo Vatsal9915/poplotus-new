@@ -46,7 +46,7 @@ const blogPosts = [
     type: "article",
     title: "5 Health Benefits of Makhana You Didn't Know",
     excerpt: "Discover the amazing nutritional properties of foxnuts and why they should be part of your daily diet.",
-    image: "/health-benefits-makhana.png",
+    image: "/makhana-benefits.png",
     author: "Dr. Anjali Sharma",
     readTime: "8 min",
     tags: ["Health", "Nutrition", "Wellness"],
@@ -54,11 +54,11 @@ const blogPosts = [
     fullContent: `
       Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
 
-      "**Rich** in Protein and Low in Calories",
+      Rich in Protein and Low in Calories
       
       One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately **9.7g of protein** while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
 
-      ### Packed with Essential Minerals
+      Packed with Essential Minerals
       
       Makhana is rich in calcium, magnesium, iron, and phosphorus. The calcium content is particularly impressive, making it beneficial for bone health. The magnesium helps in maintaining heart health and regulating blood pressure.
 
@@ -87,7 +87,7 @@ const blogPosts = [
     type: "recipe",
     title: "Spicy Makhana Chaat",
     excerpt: "A delicious street-food inspired recipe that combines the crunch of makhana with tangy chutneys.",
-    image: "/makhana-chaat.png",
+    image: "/spicy-masala-makhana.png",
     author: "Chef Rajesh",
     readTime: "10 min",
     cookTime: "20 min",
@@ -156,7 +156,7 @@ const blogPosts = [
     type: "recipe",
     title: "Chocolate Makhana Energy Balls",
     excerpt: "No-bake energy balls that combine the goodness of makhana with rich chocolate flavor.",
-    image: "/chocolate-energy-balls.png",
+    image: "/chocolate-makhana.png",
     author: "Nutritionist Kavya",
     readTime: "5 min",
     cookTime: "15 min",
@@ -185,7 +185,7 @@ const blogPosts = [
     type: "article",
     title: "Sustainable Snacking: Our Environmental Commitment",
     excerpt: "Learn about PopLotus's journey towards sustainable packaging and eco-friendly practices.",
-    image: "/sustainability-article.png",
+    image: "/sustainability.png",
     author: "Sustainability Team",
     readTime: "6 min",
     tags: ["Sustainability", "Environment", "Corporate"],
