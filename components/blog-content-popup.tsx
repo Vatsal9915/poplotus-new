@@ -14,50 +14,29 @@ interface BlogContentPopupProps {
 export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentPopupProps) {
   if (!isOpen || !post) return null
 
-  const recipeContent = {
-    ingredients: [
-      "1 cup PopLotus Raw Makhana",
-      "4 cups whole milk",
-      "1/2 cup sugar (adjust to taste)",
-      "1/4 cup chopped almonds",
-      "1/4 cup chopped pistachios",
-      "1/2 tsp cardamom powder",
-      "A pinch of saffron",
-      "2 tbsp ghee",
-    ],
-    instructions: [
-      "Heat ghee in a heavy-bottomed pan and roast the makhana until crispy. Set aside.",
-      "In the same pan, bring milk to a boil and simmer for 10 minutes.",
-      "Add the roasted makhana to the milk and cook for 15 minutes until soft.",
-      "Add sugar, cardamom powder, and saffron. Mix well.",
-      "Garnish with chopped nuts and serve hot or chilled.",
-      "Optional: Blend half the mixture for a creamier texture.",
-    ],
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: post.title,
+          text: post.excerpt,
+          url: window.location.href, // Shares the current URL of the page
+        })
+        .catch((error) => console.error("Error sharing:", error))
+    } else {
+      // Fallback for browsers that don't support navigator.share
+      navigator.clipboard
+        .writeText(`${post.title} - ${post.excerpt} ${window.location.href}`)
+        .then(() => alert("Link copied to clipboard!"))
+        .catch((error) => console.error("Error copying to clipboard:", error))
+    }
   }
 
-  const articleContent = `
-    Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
-
-    **Rich in Protein and Low in Calories**
-    
-    One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately 9.7g of protein while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
-
-    **Packed with Essential Minerals**
-    
-    Makhana is rich in calcium, magnesium, iron, and phosphorus. The calcium content is particularly impressive, making it beneficial for bone health. The magnesium helps in maintaining heart health and regulating blood pressure.
-
-    **Antioxidant Properties**
-    
-    These lotus seeds contain flavonoids and other antioxidants that help fight free radicals in the body, potentially reducing the risk of chronic diseases and supporting overall health.
-
-    **Digestive Health Benefits**
-    
-    The fiber content in makhana aids digestion and helps maintain gut health. It's also easy to digest, making it suitable for people with sensitive stomachs.
-
-    **Heart Health Support**
-    
-    The low sodium and high potassium content makes makhana heart-friendly. Regular consumption may help in maintaining healthy blood pressure levels.
-  `
+  const handleShopIngredients = () => {
+    alert("Shop Ingredients functionality will be implemented here!")
+    // Example: Redirect to a shop page or add items to cart
+    // window.location.href = '/products';
+  }
 
   return (
     <>
@@ -131,7 +110,7 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Ingredients</h3>
                   <ul className="space-y-2">
-                    {recipeContent.ingredients.map((ingredient, index) => (
+                    {post.fullIngredients.map((ingredient: string, index: number) => (
                       <li key={index} className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-gold rounded-full flex-shrink-0" />
                         <span className="text-gray-700">{ingredient}</span>
@@ -143,7 +122,7 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Instructions</h3>
                   <ol className="space-y-4">
-                    {recipeContent.instructions.map((instruction, index) => (
+                    {post.fullInstructions.map((instruction: string, index: number) => (
                       <li key={index} className="flex gap-4">
                         <div className="w-8 h-8 bg-gold text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">
                           {index + 1}
@@ -156,7 +135,7 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
               </div>
             ) : (
               <div className="prose prose-lg max-w-none">
-                <div className="text-gray-700 leading-relaxed whitespace-pre-line">{articleContent}</div>
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">{post.fullContent}</div>
               </div>
             )}
 
@@ -178,10 +157,15 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                 <Button
                   variant="outline"
                   className="border-gold text-gold hover:bg-gold hover:text-white bg-transparent"
+                  onClick={handleShare}
                 >
-                  Share Recipe
+                  {post.type === "recipe" ? "Share Recipe" : "Share Article"}
                 </Button>
-                <Button className="bg-gold hover:bg-gold/90 text-white">Shop Ingredients</Button>
+                {post.type === "recipe" && (
+                  <Button className="bg-gold hover:bg-gold/90 text-white" onClick={handleShopIngredients}>
+                    Shop Ingredients
+                  </Button>
+                )}
               </div>
             </div>
           </div>
