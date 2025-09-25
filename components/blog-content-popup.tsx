@@ -26,15 +26,15 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
     if (navigator.share) {
       try {
         await navigator.share(shareData)
-        console.log("Content shared successfully")
+        console.log("[v0] Content shared successfully")
       } catch (error) {
-        console.error("Error sharing via navigator.share:", error)
+        console.error("[v0] Error sharing via navigator.share:", error)
         try {
           await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
           alert("Link copied to clipboard!")
-          console.log("Link copied to clipboard as fallback.")
+          console.log("[v0] Link copied to clipboard as fallback.")
         } catch (clipboardError) {
-          console.error("Error copying to clipboard:", clipboardError)
+          console.error("[v0] Error copying to clipboard:", clipboardError)
           alert("Failed to share or copy link.")
         }
       }
@@ -42,9 +42,9 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
       try {
         await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
         alert("Link copied to clipboard!")
-        console.log("Link copied to clipboard (navigator.share not supported).")
+        console.log("[v0] Link copied to clipboard (navigator.share not supported).")
       } catch (clipboardError) {
-        console.error("Error copying to clipboard:", clipboardError)
+        console.error("[v0] Error copying to clipboard:", clipboardError)
         alert("Failed to copy link to clipboard.")
       }
     }
@@ -133,9 +133,9 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            p: ({ node, ...props }) => <span {...props} className="text-gray-700" />,
+                            p: ({ node, ...props }) => <span {...props} className="text-gold-700" />,
                             strong: ({ node, ...props }) => (
-                              <strong className="font-semibold text-gray-900" {...props} />
+                              <strong className="font-semibold text-gold-900" {...props} />
                             ),
                           }}
                         >
@@ -157,9 +157,9 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed pt-1" {...props} />,
+                            p: ({ node, ...props }) => <p className="text-gold-700 leading-relaxed pt-1" {...props} />,
                             strong: ({ node, ...props }) => (
-                              <strong className="font-semibold text-gray-900" {...props} />
+                              <strong className="font-semibold text-gold-900" {...props} />
                             ),
                           }}
                         >
@@ -175,14 +175,18 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-4" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mb-3" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="text-xl font-bold mb-2" {...props} />,
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-4 text-gold-900" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mb-3 text-gold-800" {...props} />,
+                    h3: ({ node, ...props }) => <h3 className="text-xl font-bold mb-2 text-gold-700" {...props} />,
                     p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
-                    ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 mb-4" {...props} />,
-                    ol: ({ node, ...props }) => <ol className="list-decimal list-inside space-y-2 mb-4" {...props} />,
-                    li: ({ node, ...props }) => <li className="text-gray-700" {...props} />,
-                    strong: ({ node, ...props }) => <strong className="font-semibold text-gray-900" {...props} />,
+                    ul: ({ node, ...props }) => (
+                      <ul className="list-disc list-inside space-y-2 mb-4 marker:text-gold-500" {...props} />
+                    ),
+                    ol: ({ node, ...props }) => (
+                      <ol className="list-decimal list-inside space-y-2 mb-4 marker:text-gold-500" {...props} />
+                    ),
+                    li: ({ node, ...props }) => <li className="text-gold-700" {...props} />,
+                    strong: ({ node, ...props }) => <strong className="font-semibold text-gold-900" {...props} />,
                     em: ({ node, ...props }) => <em className="italic" {...props} />,
                     a: ({ node, ...props }) => <a className="text-gold hover:underline" {...props} />,
                   }}
