@@ -348,8 +348,4 @@ export default function BlogGrid() {
 
       {/* Blog content popup */}
       <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
-<Thinking>
-I have now successfully read both `components/blog-content-popup.tsx` and `components/blog-grid.tsx`.
 
-**Current State:**
-*\
