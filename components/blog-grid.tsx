@@ -107,11 +107,12 @@ const blogPosts = [
       "Fresh coriander for garnish",
     ],
     fullInstructions: [
-      "In a large bowl, combine roasted makhana, onion, tomato, and cucumber.",
-      "Add green chutney, tamarind chutney, lemon juice, chaat masala, and salt.",
-      "Mix everything gently until well combined.",
-      "Garnish with fresh coriander and serve immediately.",
-      "**Pro Tip:** For extra crunch, add some crushed papdi or sev.",
+      "Heat ghee in a heavy-bottomed pan and roast the makhana until crispy. Set aside.",
+      "In the same pan, bring milk to a boil and simmer for 10 minutes.",
+      "Add the roasted makhana to the milk and cook for 15 minutes until soft.",
+      "Add sugar, cardamom powder, and saffron. Mix well.",
+      "Garnish with chopped nuts and serve hot or chilled.",
+      "**Pro Tip:** Blend half the mixture for a creamier texture.",
     ],
   },
   {
@@ -262,9 +263,7 @@ export default function BlogGrid() {
                     {/* Post type badge */}
                     <div className="absolute top-4 left-4">
                       <Badge
-                        className={`${
-                          post.type === "recipe" ? "bg-green-500 text-white" : "bg-blue-500 text-white"
-                        } flex items-center gap-1 backdrop-blur-sm`}
+                        className={`${post.type === "recipe" ? "bg-green-500 text-white" : "bg-blue-500 text-white"} flex items-center gap-1 backdrop-blur-sm`}
                       >
                         {post.type === "recipe" ? <ChefHat className="w-3 h-3" /> : <BookOpen className="w-3 h-3" />}
                         {post.type === "recipe" ? "Recipe" : "Article"}
@@ -309,13 +308,7 @@ export default function BlogGrid() {
                       <div className="mb-4">
                         <span className="text-sm text-gray-600">Difficulty: </span>
                         <span
-                          className={`text-sm font-medium ${
-                            post.difficulty === "Easy"
-                              ? "text-green-600"
-                              : post.difficulty === "Medium"
-                                ? "text-yellow-600"
-                                : "text-red-600"
-                          }`}
+                          className={`text-sm font-medium ${post.difficulty === "Easy" ? "text-green-600" : post.difficulty === "Medium" ? "text-yellow-600" : "text-red-600"}`}
                         >
                           {post.difficulty}
                         </span>
@@ -346,10 +339,8 @@ export default function BlogGrid() {
         </div>
       </section>
 
-      
+      {/* Blog content popup */}
       <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
-      </>
-    )
+    </>
+  )
 }
-    
-
