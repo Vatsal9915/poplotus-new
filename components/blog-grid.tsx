@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Clock, User, ChefHat, BookOpen } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import BlogFilters from "./blog-filters"
 import BlogContentPopup from "./blog-content-popup"
 
@@ -46,21 +46,23 @@ const blogPosts = [
     type: "article",
     title: "5 Health Benefits of Makhana You Didn't Know",
     excerpt: "Discover the amazing nutritional properties of foxnuts and why they should be part of your daily diet.",
-    image: "/makhana-benefits.png",
+    image: "/health-benefits-makhana.png",
     author: "Dr. Anjali Sharma",
     readTime: "8 min",
     tags: ["Health", "Nutrition", "Wellness"],
     date: "March 12, 2024",
     fullContent: `
       Makhana, also known as foxnuts or lotus seeds, has been treasured in Indian cuisine and Ayurveda for centuries. These white, puffy seeds are not just delicious but pack an incredible nutritional punch that makes them a true superfood.
-- Rich in Protein and Low in Calories
+
+      ### Rich in Protein and Low in Calories
       
       One of the most remarkable aspects of makhana is its high protein content. A 100g serving contains approximately **9.7g of protein** while being incredibly low in calories (only 347 calories per 100g). This makes it an excellent snack for weight management and muscle building.
 
-      Packed with Essential Minerals
+      ### Packed with Essential Minerals
       
       Makhana is rich in calcium, magnesium, iron, and phosphorus. The calcium content is particularly impressive, making it beneficial for bone health. The magnesium helps in maintaining heart health and regulating blood pressure.
-### Antioxidant Properties
+
+      ### Antioxidant Properties
       
       These lotus seeds contain flavonoids and other antioxidants that help fight free radicals in the body, potentially reducing the risk of chronic diseases and supporting overall health.
 
@@ -85,7 +87,7 @@ const blogPosts = [
     type: "recipe",
     title: "Spicy Makhana Chaat",
     excerpt: "A delicious street-food inspired recipe that combines the crunch of makhana with tangy chutneys.",
-    image: "/spicy-masala-makhana.png",
+    image: "/makhana-chaat.png",
     author: "Chef Rajesh",
     readTime: "10 min",
     cookTime: "20 min",
@@ -96,7 +98,7 @@ const blogPosts = [
       "**2 cups** PopLotus Roasted Makhana",
       "**1/2 cup** finely chopped onion",
       "**1/2 cup** finely chopped tomato",
-      "**1/4 cup** finely chopped cucumber",
+      "**1/2 cup** finely chopped cucumber",
       "**2 tbsp** green chutney",
       "**2 tbsp** tamarind chutney",
       "**1 tbsp** lemon juice",
@@ -154,7 +156,7 @@ const blogPosts = [
     type: "recipe",
     title: "Chocolate Makhana Energy Balls",
     excerpt: "No-bake energy balls that combine the goodness of makhana with rich chocolate flavor.",
-    image: "/chocolate-makhana.png",
+    image: "/chocolate-energy-balls.png",
     author: "Nutritionist Kavya",
     readTime: "5 min",
     cookTime: "15 min",
@@ -183,7 +185,7 @@ const blogPosts = [
     type: "article",
     title: "Sustainable Snacking: Our Environmental Commitment",
     excerpt: "Learn about PopLotus's journey towards sustainable packaging and eco-friendly practices.",
-    image: "/sustainability.png",
+    image: "/sustainability-article.png",
     author: "Sustainability Team",
     readTime: "6 min",
     tags: ["Sustainability", "Environment", "Corporate"],
@@ -223,6 +225,22 @@ export default function BlogGrid() {
   const [selectedPost, setSelectedPost] = useState<any>(null)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const id = params.get("post")
+      if (id) {
+        const found = blogPosts.find((p) => String(p.id) === id)
+        if (found) {
+          setSelectedPost(found)
+          setIsPopupOpen(true)
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to read post param:", e)
+    }
+  }, [])
+
   const filteredPosts = blogPosts.filter((post) => {
     if (activeFilter === "all") return true
     if (activeFilter === "recipes") return post.type === "recipe"
@@ -233,6 +251,25 @@ export default function BlogGrid() {
   const handlePostClick = (post: any) => {
     setSelectedPost(post)
     setIsPopupOpen(true)
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.set("post", String(post.id))
+      window.history.pushState({}, "", url.toString())
+    } catch (e) {
+      console.warn("Failed to set post param:", e)
+    }
+  }
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false)
+    setSelectedPost(null)
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.delete("post")
+      window.history.pushState({}, "", url.toString())
+    } catch (e) {
+      console.warn("Failed to remove post param:", e)
+    }
   }
 
   return (
@@ -338,7 +375,7 @@ export default function BlogGrid() {
       </section>
 
       {/* Blog content popup */}
-      <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
+      <BlogContentPopup post={selectedPost} isOpen={isPopupOpen} onClose={handleClosePopup} />
     </>
   )
 }
