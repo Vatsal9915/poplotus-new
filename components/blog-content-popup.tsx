@@ -46,19 +46,19 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
     if (navigator.share) {
       try {
         await navigator.share(shareData)
-        console.log("[v0] Shared via Web Share:", shareUrl)
+        console.log("Shared via Web Share:", shareUrl)
         return
       } catch (err) {
-        console.warn("[v0] navigator.share failed, falling back to clipboard:", (err as Error)?.message)
+        console.warn("navigator.share failed, falling back to clipboard:", (err as Error)?.message)
       }
     }
 
     try {
       await navigator.clipboard.writeText(shareUrl)
       alert("Link copied to clipboard!")
-      console.log("[v0] Copied URL to clipboard:", shareUrl)
+      console.log("Copied URL to clipboard:", shareUrl)
     } catch (clipboardError) {
-      console.error("[v0] Clipboard copy failed:", clipboardError)
+      console.error("Clipboard copy failed:", clipboardError)
       alert("Unable to share or copy link.")
     }
   }
