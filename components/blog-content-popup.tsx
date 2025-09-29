@@ -13,40 +13,53 @@ interface BlogContentPopupProps {
   onClose: () => void
 }
 
+function normalizeMd(input: string): string {
+  if (!input) return ""
+  // Replace tabs with two spaces to simplify indentation handling
+  const lines = String(input).replace(/\t/g, "  ").split("\n")
+  const indents = lines
+    .filter((l) => l.trim().length > 0)
+    .map((l) => (l.match(/^ +/) ? (l.match(/^ +/) as RegExpMatchArray)[0].length : 0))
+  const min = indents.length ? Math.min(...indents) : 0
+  const out = lines
+    .map((l) => (min ? l.slice(Math.min(min, l.length)) : l))
+    .join("\n")
+    .trim()
+  return out
+}
+
 export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentPopupProps) {
   if (!isOpen || !post) return null
 
   const handleShare = async () => {
+    const url = new URL(window.location.href)
+    url.searchParams.set("post", String(post.id))
+    const shareUrl = url.toString()
+
     const shareData = {
       title: post.title,
       text: post.excerpt,
-      url: window.location.href,
+      url: shareUrl,
     }
 
+    // Prefer Web Share when available, else fallback to clipboard
     if (navigator.share) {
       try {
         await navigator.share(shareData)
-        console.log("[v0] Content shared successfully")
-      } catch (error) {
-        console.error("[v0] Error sharing via navigator.share:", error)
-        try {
-          await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
-          alert("Link copied to clipboard!")
-          console.log("[v0] Link copied to clipboard as fallback.")
-        } catch (clipboardError) {
-          console.error("[v0] Error copying to clipboard:", clipboardError)
-          alert("Failed to share or copy link.")
-        }
+        console.log("[v0] Shared via Web Share:", shareUrl)
+        return
+      } catch (err) {
+        console.warn("[v0] navigator.share failed, falling back to clipboard:", (err as Error)?.message)
       }
-    } else {
-      try {
-        await navigator.clipboard.writeText(`${shareData.title} - ${shareData.text} ${shareData.url}`)
-        alert("Link copied to clipboard!")
-        console.log("[v0] Link copied to clipboard (navigator.share not supported).")
-      } catch (clipboardError) {
-        console.error("[v0] Error copying to clipboard:", clipboardError)
-        alert("Failed to copy link to clipboard.")
-      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      alert("Link copied to clipboard!")
+      console.log("[v0] Copied URL to clipboard:", shareUrl)
+    } catch (clipboardError) {
+      console.error("[v0] Clipboard copy failed:", clipboardError)
+      alert("Unable to share or copy link.")
     }
   }
 
@@ -139,7 +152,7 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                             ),
                           }}
                         >
-                          {ingredient}
+                          {normalizeMd(ingredient)}
                         </ReactMarkdown>
                       </li>
                     ))}
@@ -163,7 +176,7 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                             ),
                           }}
                         >
-                          {instruction}
+                          {normalizeMd(instruction)}
                         </ReactMarkdown>
                       </li>
                     ))}
@@ -171,28 +184,36 @@ export default function BlogContentPopup({ post, isOpen, onClose }: BlogContentP
                 </div>
               </div>
             ) : (
-              <div className="prose prose-lg max-w-none">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-4 text-gold-900" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mb-3 text-gold-800" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="text-xl font-bold mb-2 text-gold-700" {...props} />,
-                    p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
-                    ul: ({ node, ...props }) => (
-                      <ul className="list-disc list-inside space-y-2 mb-4 marker:text-gold-500" {...props} />
-                    ),
-                    ol: ({ node, ...props }) => (
-                      <ol className="list-decimal list-inside space-y-2 mb-4 marker:text-gold-500" {...props} />
-                    ),
-                    li: ({ node, ...props }) => <li className="text-gold-700" {...props} />,
-                    strong: ({ node, ...props }) => <strong className="font-semibold text-gold-900" {...props} />,
-                    em: ({ node, ...props }) => <em className="italic" {...props} />,
-                    a: ({ node, ...props }) => <a className="text-gold hover:underline" {...props} />,
-                  }}
-                >
-                  {post.fullContent}
-                </ReactMarkdown>
+              <div className="max-w-none font-sans">
+                <div className="markdown-article">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h1: ({ node, ...props }) => (
+                        <h1 className="text-3xl font-semibold text-gray-900 mb-4" {...props} />
+                      ),
+                      h2: ({ node, ...props }) => (
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-3" {...props} />
+                      ),
+                      h3: ({ node, ...props }) => (
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2" {...props} />
+                      ),
+                      p: ({ node, ...props }) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
+                      strong: ({ node, ...props }) => <strong className="font-semibold text-gray-900" {...props} />,
+                      em: ({ node, ...props }) => <em className="italic" {...props} />,
+                      a: ({ node, ...props }) => <a className="text-gold hover:underline" {...props} />,
+                      ul: ({ node, ...props }) => (
+                        <ul className="list-disc pl-6 marker:text-gold text-gray-700 space-y-2" {...props} />
+                      ),
+                      li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                      ol: ({ node, ...props }) => (
+                        <ol className="list-decimal pl-6 marker:text-gold text-gray-700 space-y-2" {...props} />
+                      ),
+                    }}
+                  >
+                    {normalizeMd(post.fullContent)}
+                  </ReactMarkdown>
+                </div>
               </div>
             )}
 
