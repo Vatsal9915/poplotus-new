@@ -218,6 +218,63 @@ const blogPosts = [
       *   **Local Initiatives:** Supporting environmental protection efforts.
     `,
   },
+  {
+    id: 7,
+    type: "article",
+    title: "Superfood Spotlight: Why the World is Switching to Makhana",
+    excerpt: "Makhana is going global! A crunchy, protein-packed superfood that’s low in calories and big on health — here’s why the world is switching to it.",
+    image: "/makhana-benefits.png",
+    author: "Dr. Anjali Sharma",
+    readTime: "8 min",
+    tags: ["Health", "Nutritional", "Superfood"],
+    date: "October 01, 2025",
+    fullContent: `
+      Move over chia seeds and quinoa — there’s a new superfood taking the world by storm: Makhana (foxnuts/lotus seeds). Once a traditional Indian snack, it’s now making its way onto global shelves as a healthy, guilt-free alternative to chips and fried snacks.
+
+      ### What Makes Makhana a Superfood?
+      
+      * Low in calories, high in nutrients
+
+      * Protein & fiber rich → keeps you full longer
+
+      * Antioxidant powerhouse → fights aging & boosts immunity
+
+      * Gluten-free & vegan → safe for almost everyone
+
+      * Mineral-rich → calcium, magnesium & iron for stronger bones and better heart health
+      
+      ### Key Health Benefits
+      
+      1. Supports weight loss with its light yet filling crunch
+
+      2. Diabetic-friendly thanks to a low glycemic index
+
+      3. Promotes heart health with magnesium
+
+      4. Provides a natural energy boost without sugar crashes
+
+      5. Keeps skin youthful with antioxidants
+
+      ### Why People Love It?
+      
+       Makhana isn’t just healthy — it’s fun, versatile, and delicious. You can roast it, season it, or try exciting flavors like ### Habanero, Tulsi Basil Pesto, or Wasabi (yes, we’ve done it at PopLotus ✨).
+
+       From New York to London, Dubai to Singapore, health enthusiasts are swapping chips for makhana — and loving it.
+      
+      ### Digestive Health Benefits
+      
+      The fiber content in makhana aids digestion and helps maintain gut health. It's also easy to digest, making it suitable for people with sensitive stomachs.
+
+      ### From Bihar to the World
+      
+      Makhana has its roots in Bihar, India, but today it’s part of a global snacking trend. With rising demand in the USA, UK, UAE, and Europe, this humble lotus seed is now a true superfood export story.
+
+      ### Final Thought
+      The world is switching to makhana because it’s more than a snack — it’s a superfood revolution.
+
+      So next time hunger strikes, skip the junk and snack smart with PopLotus Makhana
+    `,
+  },
 ]
 
 export default function BlogGrid() {
