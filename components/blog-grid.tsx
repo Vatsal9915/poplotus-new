@@ -257,7 +257,7 @@ const blogPosts = [
 
       ### Why People Love It?
       
-       Makhana isn’t just healthy — it’s fun, versatile, and delicious. You can roast it, season it, or try exciting flavors like ### Habanero, Tulsi Basil Pesto, or Wasabi (yes, we’ve done it at PopLotus ✨).
+       Makhana isn’t just healthy — it’s fun, versatile, and delicious. You can roast it, season it, or try exciting flavors like Habanero, Tulsi Basil Pesto, or Wasabi (yes, we’ve done it at PopLotus ✨).
 
        From New York to London, Dubai to Singapore, health enthusiasts are swapping chips for makhana — and loving it.
       
