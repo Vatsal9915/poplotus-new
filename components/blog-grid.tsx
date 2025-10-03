@@ -224,7 +224,7 @@ const blogPosts = [
     title: "Superfood Spotlight: Why the World is Switching to Makhana",
     excerpt: "Makhana is going global! A crunchy, protein-packed superfood that’s low in calories and big on health — here’s why the world is switching to it.",
     image: "/spotlight.webp",
-    author: "Dr. Pratham Khemka",
+    author: "Dr. Vibhuti Mishra",
     readTime: "8 min",
     tags: ["Health", "Nutritional", "Superfood"],
     date: "October 01, 2025",
