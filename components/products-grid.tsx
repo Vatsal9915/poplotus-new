@@ -581,7 +581,7 @@ export default function ProductsGrid() {
           </section>
 
           {/* Makhana Bhujiya Banner */}
-  <section className="relative mb-20 w-full" id="makhana-bhujiya-section">
+  <section className="relative mb-20 w-full" id="makhana-bhujia-section">
   {/* Background Image */}
   <div 
     className="absolute inset-0 bg-cover bg-center opacity-70"
