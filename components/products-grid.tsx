@@ -463,12 +463,39 @@ export default function ProductsGrid() {
   const cookiesProducts = ourProducts.filter((p) => p.category === "cookies")
   const chanaProducts = ourProducts.filter((p) => p.category === "chana")
 
+    useEffect(() => {
+    const scrollToId = (id?: string | null) => {
+      if (!id) return
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+
+    scrollToId(typeof window !== "undefined" ? window.location.hash?.slice(1) || null : null)
+
+    const onHashChange = () => scrollToId(window.location.hash?.slice(1) || null)
+    window.addEventListener("hashchange", onHashChange)
+
+    const params = new URLSearchParams(window.location.search)
+    const q = params.get("q")?.toLowerCase()
+    if (q) {
+      if (q.includes("makhana")) scrollToId("flavoured-makhana-section")
+      else if (q.includes("chip")) scrollToId("chips-section")
+      else if (q.includes("cookie")) scrollToId("cookies-section")
+      else if (q.includes("chana") || q.includes("jor") || q.includes("garam")) scrollToId("chana-section")
+      else if (q.includes("gift")) scrollToId("gifting-section")
+    }
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange)
+    }
+  }, [])
+
   return (
     <>
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Flavored Makhana Section */}
-          <section className="mb-20" id="flavoured-makhana-section">
+          <section className="mb-20 scroll-mt-24 md:scroll-mt-28" id="flavoured-makhana-section">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flavored Makhana</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -490,7 +517,7 @@ export default function ProductsGrid() {
           </section>
 
           {/* Makhana Chips Section */}
-          <section className="mb-20">
+          <section className="mb-20 scroll-mt-24 md:scroll-mt-28" id="chips-section">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mb-4">Makhana Chips</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -505,7 +532,7 @@ export default function ProductsGrid() {
           </section>
 
           {/* Makhana Cookies Section */}
-          <section className="mb-20">
+          <section className="mb-20 scroll-mt-24 md:scroll-mt-28" id="cookies-section">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mb-4">Makhana Cookies</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -536,7 +563,7 @@ export default function ProductsGrid() {
           */}
 
           {/* Gifting Section */}
-          <section className="mb-20">
+          <section className="mb-20 scroll-mt-24 md:scroll-mt-28" id="gifting-section">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 <Gift className="w-8 h-8 inline-block mr-3 text-gold" />
@@ -554,7 +581,7 @@ export default function ProductsGrid() {
           </section>
 
           {/* Makhana Bhujiya Banner */}
-  <section className="relative mb-20 w-full">
+  <section className="relative mb-20 w-full" id="makhana-bhujiya-section">
   {/* Background Image */}
   <div 
     className="absolute inset-0 bg-cover bg-center opacity-70"
