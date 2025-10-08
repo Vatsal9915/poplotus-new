@@ -1,14 +1,23 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+
 import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
-import { Menu, X, ShoppingBag, Sparkles, Heart, ChevronDown } from "lucide-react"
+import { useState, useMemo, useEffect } from "react"
+import { Menu, X, ShoppingBag, Sparkles, Heart, ChevronDown, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-context"
 import { useWishlist } from "./wishlist-context"
 import CartDropdown from "./cart-dropdown"
 import WishlistDropdown from "./wishlist-dropdown"
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -30,16 +39,60 @@ export default function Navigation() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isWishlistOpen, setIsWishlistOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { totalItems } = useCart()
   const { wishlistCount } = useWishlist()
+  const router = useRouter()
 
-  const handleNavClick = () => {
+  const pageLinks = useMemo(() => {
+    const links: Array<{ name: string; href: string; group: string }> = []
+    navItems.forEach((item) => {
+      if (item.dropdown?.length) {
+        item.dropdown.forEach((d) => links.push({ name: d.name, href: d.href, group: item.name }))
+      } else {
+        links.push({ name: item.name, href: item.href, group: "Pages" })
+      }
+    })
+    return links
+  }, [])
+
+  const contentLinks = useMemo(
+    () =>
+      [
+        { name: "Makhana", href: "/products#flavoured-makhana-section", value: "makhana foxnut lotus seeds protein" },
+        { name: "Makhana Chips", href: "/products#chips-section", value: "chips makhana chips baked crispy" },
+        { name: "Makhana Cookies", href: "/products#cookies-section", value: "cookies dessert sweet healthy" },
+        { name: "Chana Jor Garam", href: "/products#chana-section", value: "chana jor garam chickpeas roasted" },
+        { name: "Gifting", href: "/products#gifting-section", value: "gift gifting box hamper" },
+      ] as Array<{ name: string; href: string; value: string }>,
+    [],
+  )
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault()
+        setIsSearchOpen((v) => !v)
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [])
+
+  const closeNavUI = () => {
     setIsMenuOpen(false)
     setActiveDropdown(null)
-    // Scroll to top when navigating
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 100)
+    setIsCartOpen(false)
+    setIsWishlistOpen(false)
+  }
+
+  const handleNavClick = (opts?: { skipScroll?: boolean }) => {
+    closeNavUI()
+    if (!opts?.skipScroll) {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }, 100)
+    }
   }
 
   return (
@@ -48,19 +101,14 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center group" onClick={handleNavClick}>
-              <Image
-                src="/logo1.png"
-                alt="PopLotus Logo"
-                width={140}   // adjust width as needed
-                height={39}   // adjust height as needed
-                className="object-contain"
-                priority
-              />
+            <Link href="/" className="flex items-center group" onClick={() => handleNavClick()}>
+              <span className="font-serif text-2xl font-bold text-gray-900 group-hover:text-gold transition-colors duration-300">
+                PopLotus
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center ml-6 lg:ml-10 space-x-6 xl:space-x-8">
               {navItems.map((item) => (
                 <div key={item.name} className="relative group">
                   {item.dropdown ? (
@@ -81,7 +129,7 @@ export default function Navigation() {
                             <Link
                               key={dropdownItem.name}
                               href={dropdownItem.href}
-                              onClick={handleNavClick}
+                              onClick={() => handleNavClick()}
                               className="block px-4 py-2 text-gray-700 hover:text-gold hover:bg-gold/5 transition-all duration-300"
                             >
                               {dropdownItem.name}
@@ -93,7 +141,7 @@ export default function Navigation() {
                   ) : (
                     <Link
                       href={item.href}
-                      onClick={handleNavClick}
+                      onClick={() => handleNavClick()}
                       className="text-gray-700 hover:text-gold transition-all duration-300 relative group py-2"
                     >
                       {item.name}
@@ -103,8 +151,16 @@ export default function Navigation() {
                 </div>
               ))}
 
-              {/* Action buttons container with consistent spacing */}
-              <div className="flex items-center space-x-3">
+              {/* Action buttons */}
+              <div className="flex items-center space-x-3 lg:space-x-4">
+                {/* Search button */}
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="relative p-2 text-gray-700 hover:text-gold transition-colors duration-300"
+                  aria-label="Search"
+                >
+                  <Search className="w-6 h-6" />
+                </button>
                 {/* Wishlist button */}
                 <button
                   onClick={() => setIsWishlistOpen(true)}
@@ -117,7 +173,6 @@ export default function Navigation() {
                     </span>
                   )}
                 </button>
-
                 {/* Cart button */}
                 <button
                   onClick={() => setIsCartOpen(true)}
@@ -130,13 +185,12 @@ export default function Navigation() {
                     </span>
                   )}
                 </button>
-
-                {/* Shop Now button with consistent height */}
-                <Link href="/products" onClick={handleNavClick}>
-                  <Button className="relative bg-gradient-to-r from-gold to-yellow-600 hover:from-yellow-600 hover:to-gold text-white font-semibold px-6 py-2 h-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2 overflow-hidden group border border-gold/20">
+                {/* Shop Now */}
+                <Link href="/products" onClick={() => handleNavClick()}>
+                  <Button className="relative bg-gradient-to-r from-amber-800 to-yellow-900 hover:from-yellow-900 hover:to-amber-800 text-white font-bold px-6 py-2 h-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2 overflow-hidden group border border-amber-900/20">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                     <Sparkles className="w-4 h-4 animate-pulse relative z-10" />
-                    <span className="relative z-10">Shop Now</span>
+                    <span className="relative z-10 font-bold">Shop Now</span>
                     <ShoppingBag className="w-4 h-4 relative z-10" />
                   </Button>
                 </Link>
@@ -145,6 +199,15 @@ export default function Navigation() {
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-3">
+              {/* Search button */}
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="relative p-2 text-gray-700 hover:text-gold transition-colors duration-300"
+                aria-label="Search"
+              >
+                <Search className="w-6 h-6" />
+              </button>
+
               <button
                 onClick={() => setIsWishlistOpen(true)}
                 className="relative p-2 text-gray-700 hover:text-pink-500 transition-colors duration-300"
@@ -192,7 +255,7 @@ export default function Navigation() {
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             className="block px-6 py-2 text-gray-600 hover:text-gold hover:bg-gold/5 rounded-lg transition-all duration-300"
-                            onClick={handleNavClick}
+                            onClick={() => handleNavClick()}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -202,15 +265,15 @@ export default function Navigation() {
                       <Link
                         href={item.href}
                         className="block px-3 py-2 text-gray-700 hover:text-gold hover:bg-gold/5 rounded-lg transition-all duration-300"
-                        onClick={handleNavClick}
+                        onClick={() => handleNavClick()}
                       >
                         {item.name}
                       </Link>
                     )}
                   </div>
                 ))}
-                <Link href="/products" onClick={handleNavClick}>
-                  <Button className="w-full mt-2 bg-gradient-to-r from-gold to-yellow-600 text-white font-semibold rounded-full shadow-lg flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-300">
+                <Link href="/products" onClick={() => handleNavClick()}>
+                  <Button className="w-full mt-2 bg-gradient-to-r from-amber-800 to-yellow-900 text-white font-bold rounded-full shadow-lg flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-300">
                     <Sparkles className="w-4 h-4" />
                     Shop Now
                     <ShoppingBag className="w-4 h-4" />
@@ -221,6 +284,48 @@ export default function Navigation() {
           )}
         </div>
       </nav>
+
+      <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} title="Search" description="Search pages">
+        <CommandInput placeholder="Search pages and content… (Press ⌘K / Ctrl+K)" />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+
+          <CommandGroup heading="Pages">
+            {pageLinks.map((link) => (
+              <CommandItem
+                key={`${link.group}-${link.href}`}
+                onSelect={() => {
+                  setIsSearchOpen(false)
+                  router.push(link.href)
+                  handleNavClick()
+                }}
+              >
+                {link.name}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+
+          <CommandGroup heading="Content">
+            {contentLinks.map((link) => (
+              <CommandItem
+                key={link.href}
+                value={link.value}
+                onSelect={() => {
+                  setIsSearchOpen(false)
+                  try {
+                    router.push(link.href, { scroll: false })
+                  } catch {
+                    router.push(link.href)
+                  }
+                  handleNavClick({ skipScroll: true })
+                }}
+              >
+                {link.name}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
 
       <CartDropdown isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <WishlistDropdown isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} />
