@@ -64,7 +64,7 @@ export default function Navigation() {
         { name: "Makhana Cookies", href: "/products#cookies-section", value: "cookies dessert sweet healthy" },
         {/*{ name: "Chana Jor Garam", href: "/products#chana-section", value: "chana jor garam chickpeas roasted" },*/}
         { name: "Gifting", href: "/products#gifting-section", value: "gift gifting box hamper" },
-        { name: "Makhana Bhujia", href: "/products#makhana-bhujiya-section", value: "bhujia bhujiya namkeen mixture" },
+        { name: "Makhana Bhujia", href: "/products#makhana-bhujia-section", value: "bhujia bhujiya namkeen mixture" },
       ] as Array<{ name: string; href: string; value: string }>,
     [],
   )
