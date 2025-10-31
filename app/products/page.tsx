@@ -1,5 +1,3 @@
-"use client"
-
 import Navigation from "@/components/navigation"
 import PackagingTransition from "@/components/packaging-transition"
 import ProductsGrid from "@/components/products-grid"
