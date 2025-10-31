@@ -11,12 +11,28 @@ export function ShippingProgress({ cartTotal }: ShippingProgressProps) {
   const freeSampleThreshold = 999
 
   const progress = useMemo(() => {
-    const percentage = Math.min((cartTotal / freeShippingThreshold) * 100, 100)
-    const amountNeeded = Math.max(freeShippingThreshold - cartTotal, 0)
-    const hasFreeSample = cartTotal >= freeSampleThreshold
-    const hasShipping = cartTotal >= freeShippingThreshold
+    let stageProgress = 0
+    let message = ""
 
-    return { percentage, amountNeeded, hasFreeSample, hasShipping }
+    if (cartTotal >= freeSampleThreshold) {
+      stageProgress = 100
+      message = "You have unlocked all benefits!"
+    } else if (cartTotal >= freeShippingThreshold) {
+      // Between ₹499 and ₹999 - calculate progress to second milestone
+      stageProgress = ((cartTotal - freeShippingThreshold) / (freeSampleThreshold - freeShippingThreshold)) * 100
+      message = `Add ₹${freeSampleThreshold - cartTotal} more to get a Free Sample!`
+    } else {
+      // Below ₹499 - calculate progress to first milestone
+      stageProgress = (cartTotal / freeShippingThreshold) * 100
+      message = `Add ₹${freeShippingThreshold - cartTotal} more to get Free Shipping on this order`
+    }
+
+    return {
+      stageProgress: Math.min(stageProgress, 100),
+      message,
+      hasFreeSample: cartTotal >= freeSampleThreshold,
+      hasShipping: cartTotal >= freeShippingThreshold,
+    }
   }, [cartTotal])
 
   if (cartTotal >= freeSampleThreshold) {
@@ -43,17 +59,13 @@ export function ShippingProgress({ cartTotal }: ShippingProgressProps) {
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
-      <p className="text-gray-700 text-sm font-medium mb-3">
-        {progress.hasShipping
-          ? `Add ₹${freeSampleThreshold - cartTotal} more to get a Free Sample!`
-          : `Add ₹${progress.amountNeeded} more to get Free Shipping on this order`}
-      </p>
+      <p className="text-gray-700 text-sm font-medium mb-3">{progress.message}</p>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2 mb-4 overflow-hidden">
+      {/* Progress Bar with two checkpoints */}
+      <div className="relative w-full h-2 bg-gray-200 rounded-full mb-4 overflow-hidden">
         <div
           className="bg-gold h-full rounded-full transition-all duration-300"
-          style={{ width: `${progress.percentage}%` }}
+          style={{ width: `${progress.stageProgress}%` }}
         />
       </div>
 
@@ -61,11 +73,11 @@ export function ShippingProgress({ cartTotal }: ShippingProgressProps) {
       <div className="flex justify-between text-xs">
         <div className="flex items-center">
           <div className={`w-3 h-3 rounded-full mr-2 ${progress.hasShipping ? "bg-gold" : "bg-gray-300"}`} />
-          <span className={progress.hasShipping ? "text-gold font-medium" : "text-gray-600"}>Free Shipping!</span>
+          <span className={progress.hasShipping ? "text-gold font-medium" : "text-gray-600"}>₹499: Free Shipping</span>
         </div>
         <div className="flex items-center">
           <div className={`w-3 h-3 rounded-full mr-2 ${progress.hasFreeSample ? "bg-gold" : "bg-gray-300"}`} />
-          <span className={progress.hasFreeSample ? "text-gold font-medium" : "text-gray-600"}>Free Sample</span>
+          <span className={progress.hasFreeSample ? "text-gold font-medium" : "text-gray-600"}>₹999: Free Sample</span>
         </div>
       </div>
     </div>
