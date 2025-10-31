@@ -3,9 +3,17 @@
 import { useState } from "react"
 import { Tag, Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface CouponSectionProps {
-  onApplyCoupon: (coupon: CouponCode) => void
+  onApplyCoupon: (coupon: CouponCode | null) => void
   appliedCoupon: CouponCode | null
 }
 
@@ -25,11 +33,16 @@ const availableCoupons: CouponCode[] = [
 
 export function CouponSection({ onApplyCoupon, appliedCoupon }: CouponSectionProps) {
   const [couponCode, setCouponCode] = useState("")
-  const [showAvailable, setShowAvailable] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleApplyCoupon = () => {
+    if (!couponCode) {
+      setError("Please enter a coupon code")
+      return
+    }
+
     const coupon = availableCoupons.find((c) => c.code.toUpperCase() === couponCode.toUpperCase())
 
     if (!coupon) {
@@ -42,13 +55,14 @@ export function CouponSection({ onApplyCoupon, appliedCoupon }: CouponSectionPro
     setSuccess(`Coupon "${coupon.code}" applied successfully!`)
     onApplyCoupon(coupon)
     setCouponCode("")
-    setShowAvailable(false)
   }
 
   const handleQuickSelect = (coupon: CouponCode) => {
+    onApplyCoupon(coupon)
     setCouponCode(coupon.code)
     setError("")
-    setSuccess("")
+    setSuccess(`Coupon "${coupon.code}" applied successfully!`)
+    setIsOpen(false)
   }
 
   return (
@@ -66,6 +80,7 @@ export function CouponSection({ onApplyCoupon, appliedCoupon }: CouponSectionPro
           <button
             onClick={() => {
               onApplyCoupon(null)
+              setCouponCode("")
               setSuccess("")
             }}
             className="text-green-600 hover:text-green-700"
@@ -104,40 +119,43 @@ export function CouponSection({ onApplyCoupon, appliedCoupon }: CouponSectionPro
       {/* Success Message */}
       {success && <p className="text-green-600 text-sm">{success}</p>}
 
-      {/* Available Coupons Toggle */}
-      <button
-        onClick={() => setShowAvailable(!showAvailable)}
-        className="flex items-center text-gold hover:text-gold/80 text-sm font-medium transition-colors"
-      >
-        <Tag className="w-4 h-4 mr-2" />
-        {showAvailable ? "Hide" : "View"} Available Coupons
-      </button>
-
-      {/* Available Coupons List */}
-      {showAvailable && (
-        <div className="bg-gold/5 border border-gold/20 rounded-lg p-4 space-y-2">
-          <p className="text-sm font-medium text-gray-700 mb-3">Available Coupons</p>
-          <div className="space-y-2">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <button className="flex items-center text-gold hover:text-gold/80 text-sm font-medium transition-colors">
+            <Tag className="w-4 h-4 mr-2" />
+            View Available Coupons
+          </button>
+        </DialogTrigger>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Available Coupons</DialogTitle>
+            <DialogDescription>Click on any coupon to apply it to your order</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2 max-h-96 overflow-y-auto">
             {availableCoupons.map((coupon) => (
               <div
                 key={coupon.code}
-                className="flex items-center justify-between p-2 bg-white rounded border border-gray-100 hover:border-gold/30 transition-colors"
+                className="flex items-center justify-between p-3 bg-gold/5 rounded border border-gold/20 hover:border-gold/50 transition-colors"
               >
                 <div>
                   <p className="font-medium text-sm text-gray-900">{coupon.code}</p>
                   <p className="text-xs text-gray-600">{coupon.description}</p>
+                  <p className="text-sm font-semibold text-gold mt-1">
+                    {coupon.discount}
+                    {coupon.type === "percentage" ? "% off" : `₹ off`}
+                  </p>
                 </div>
-                <button
+                <Button
                   onClick={() => handleQuickSelect(coupon)}
-                  className="text-gold hover:text-gold/80 text-sm font-medium"
+                  className="bg-gold hover:bg-gold/90 text-white px-3 py-1 text-sm"
                 >
                   Use
-                </button>
+                </Button>
               </div>
             ))}
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
