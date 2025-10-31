@@ -104,7 +104,6 @@ export default function CheckoutPage() {
         clearCart()
         router.push("/products")
       } else if (paymentMethod === "razorpay") {
-        // This will be implemented after adding Razorpay API keys
         const orderData = {
           shippingAddress: formData,
           items: items,
@@ -114,24 +113,37 @@ export default function CheckoutPage() {
           orderDate: new Date().toISOString(),
         }
 
-        // Call your backend API to create Razorpay order
-        const response = await fetch("/api/create-razorpay-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderData),
-        })
+        try {
+          const response = await fetch("/api/create-razorpay-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(orderData),
+          })
 
-        if (!response.ok) {
-          throw new Error("Failed to initiate payment")
+          if (!response.ok) {
+            const contentType = response.headers.get("content-type")
+            if (contentType?.includes("application/json")) {
+              const errorData = await response.json()
+              throw new Error(errorData.error || "Failed to initiate payment")
+            } else {
+              throw new Error(`Server error: ${response.status}`)
+            }
+          }
+
+          const data = await response.json()
+          const { razorpayOrderId, amountInRupees } = data
+
+          // Load Razorpay script and open payment modal
+          alert(
+            `Razorpay Order ID: ${razorpayOrderId}\nAmount: ₹${amountInRupees}\n\nRazorpay integration ready - add your API keys to enable payments.`,
+          )
+          clearCart()
+          router.push("/products")
+        } catch (error) {
+          const errorMessage = error instanceof Error ? error.message : "Unknown error"
+          console.error("[v0] Razorpay error:", errorMessage)
+          alert(`Payment error: ${errorMessage}`)
         }
-
-        const { razorpayOrderId, amount } = await response.json()
-
-        // Load Razorpay script and open payment modal
-        // This will be implemented with your Razorpay API keys
-        alert(
-          `Razorpay Order ID: ${razorpayOrderId}\nAmount: ₹${amount}\n\nRazorpay integration ready - add your API keys to enable payments.`,
-        )
       }
     } catch (error) {
       console.error("Error processing order:", error)
