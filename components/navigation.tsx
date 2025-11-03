@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 
+import { useEffect } from "react"
 import Link from "next/link"
 import { useState, useMemo, useEffect } from "react"
 import { Menu, X, ShoppingBag, Sparkles, Heart, ChevronDown, Search } from "lucide-react"
