@@ -152,7 +152,13 @@ export default function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-gray-900">Total: ₹{totalPrice}</span>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:from-[#B8860B] hover:to-[#D4AF37] text-white">
+                <Button
+                  onClick={() => {
+                    onClose()
+                    window.location.href = "/checkout"
+                  }}
+                  className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:from-[#B8860B] hover:to-[#D4AF37] text-white"
+                >
                   Proceed to Checkout
                 </Button>
               </div>
