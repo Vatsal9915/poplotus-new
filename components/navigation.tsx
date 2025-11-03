@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 
 import { useEffect } from "react"
 import Link from "next/link"
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { Menu, X, ShoppingBag, Sparkles, Heart, ChevronDown, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-context"
