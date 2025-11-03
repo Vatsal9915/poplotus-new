@@ -11,6 +11,7 @@ import { useWishlist } from "./wishlist-context"
 import ProductDetailsPopup from "./product-details-popup"
 import Product3DViewer from "./product-3d-viewer"
 import WishlistNotification from "./wishlist-notification"
+import { useEffect } from "react"
 
 const ourProducts = [
   {
