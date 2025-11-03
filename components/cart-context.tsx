@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState } from "react"
 
 export interface CartItem {
   id: string
@@ -34,35 +34,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [selectedSample, setSelectedSample] = useState<string | null>(null)
   const [showNotification, setShowNotification] = useState(false)
   const [notificationMessage, setNotificationMessage] = useState("")
-  const [isHydrated, setIsHydrated] = useState(false)
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem("poplotus-cart")
-    const savedSample = localStorage.getItem("poplotus-sample")
-    if (savedCart) {
-      try {
-        setItems(JSON.parse(savedCart))
-      } catch (e) {
-        console.error("Failed to parse saved cart:", e)
-      }
-    }
-    if (savedSample) {
-      setSelectedSample(savedSample)
-    }
-    setIsHydrated(true)
-  }, [])
-
-  useEffect(() => {
-    if (isHydrated) {
-      localStorage.setItem("poplotus-cart", JSON.stringify(items))
-    }
-  }, [items, isHydrated])
-
-  useEffect(() => {
-    if (isHydrated) {
-      localStorage.setItem("poplotus-sample", selectedSample || "")
-    }
-  }, [selectedSample, isHydrated])
 
   const showCartNotification = (message: string) => {
     setNotificationMessage(message)
@@ -97,8 +68,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clearCart = () => {
     setItems([])
     setSelectedSample(null)
-    localStorage.removeItem("poplotus-cart")
-    localStorage.removeItem("poplotus-sample")
   }
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
