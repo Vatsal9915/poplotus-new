@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import { ProductSuggestions } from "@/components/product-suggestions"
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -310,6 +311,11 @@ export default function CheckoutPage() {
                     <option value="India">India</option>
                     <option value="Other">Other Country</option>
                   </select>
+                </div>
+
+                <div className="mt-6 pt-6 border-t">
+                  <h3 className="text-lg font-serif mb-4">Add More to Your Order</h3>
+                  <ProductSuggestions cartTotal={totalPrice} />
                 </div>
 
                 {/* Shipping Progress Bar */}
