@@ -321,6 +321,7 @@ export default function CheckoutPage() {
                   <CouponSection
                     onApplyCoupon={setAppliedCoupon}
                     appliedCoupon={appliedCoupon}
+                    cartTotal={totalPrice}
                   />
                 </div>
 
