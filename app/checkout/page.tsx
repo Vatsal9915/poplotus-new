@@ -99,6 +99,25 @@ export default function CheckoutPage() {
                     orderDate: new Date().toISOString(),
                   }
 
+                  try {
+                    const saveResponse = await fetch("/api/save-order", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        ...orderData,
+                        paymentMethod: "razorpay",
+                        razorpayOrderId: response.razorpay_order_id,
+                        razorpayPaymentId: response.razorpay_payment_id,
+                      }),
+                    })
+
+                    if (!saveResponse.ok) {
+                      console.error("Failed to save order to MongoDB")
+                    }
+                  } catch (error) {
+                    console.error("Error saving order:", error)
+                  }
+
                   const orders = JSON.parse(localStorage.getItem("orders") || "[]")
                   orders.push(orderData)
                   localStorage.setItem("orders", JSON.stringify(orders))
@@ -207,6 +226,16 @@ export default function CheckoutPage() {
           appliedCoupon: appliedCoupon?.code || null,
           paymentMethod: "cod",
           orderDate: new Date().toISOString(),
+        }
+
+        try {
+          await fetch("/api/save-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(orderData),
+          })
+        } catch (error) {
+          console.error("Error saving COD order:", error)
         }
 
         const orders = JSON.parse(localStorage.getItem("orders") || "[]")
