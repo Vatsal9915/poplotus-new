@@ -23,10 +23,10 @@ async function connectToDatabase() {
     cachedClient = client
     cachedDb = db
 
-    console.log("[v0] Connected to MongoDB")
+    console.log("Connected to MongoDB")
     return { client, db }
   } catch (error) {
-    console.error("[v0] MongoDB connection error:", error)
+    console.error("MongoDB connection error:", error)
     throw error
   }
 }
