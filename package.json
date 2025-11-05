@@ -62,7 +62,9 @@
     "vaul": "^0.9.9",
     "zod": "3.25.67",
     "react-markdown": "10.1.0",
-    "remark-gfm": "4.0.1"
+    "remark-gfm": "4.0.1",
+    "razorpay": "2.9.6",
+    "crypto": "1.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",
