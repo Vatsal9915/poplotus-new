@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { ProductSuggestions } from "@/components/product-suggestions"
+import { useCallback } from "react"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -48,14 +49,107 @@ export default function CheckoutPage() {
     country: "India",
   })
 
+  const handleRazorpayPayment = useCallback(
+    async (razorpayOrderId: string, keyId: string) => {
+      return new Promise((resolve, reject) => {
+        try {
+          if (!window.Razorpay) {
+            reject(new Error("Razorpay SDK not loaded"))
+            return
+          }
+
+          const options = {
+            key: keyId,
+            order_id: razorpayOrderId,
+            amount: Math.round(totalPrice * 100),
+            currency: "INR",
+            name: "PopLotus",
+            description: "Order from PopLotus",
+            customer_notify: 1,
+            notes: {
+              email: formData.email,
+              phone: formData.phone,
+              address: formData.street,
+              city: formData.city,
+            },
+            handler: async (response: any) => {
+              try {
+                // Verify payment on server
+                const verifyResponse = await fetch("/api/verify-razorpay-payment", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                  }),
+                })
+
+                if (verifyResponse.ok) {
+                  const orderData = {
+                    shippingAddress: formData,
+                    items: items,
+                    selectedSample: selectedSample,
+                    selectedSamples: selectedSamples,
+                    totalPrice: totalPrice,
+                    appliedCoupon: appliedCoupon?.code || null,
+                    paymentMethod: "razorpay",
+                    razorpayOrderId: response.razorpay_order_id,
+                    razorpayPaymentId: response.razorpay_payment_id,
+                    orderDate: new Date().toISOString(),
+                  }
+
+                  const orders = JSON.parse(localStorage.getItem("orders") || "[]")
+                  orders.push(orderData)
+                  localStorage.setItem("orders", JSON.stringify(orders))
+
+                  alert("Payment successful! Your order has been placed.")
+                  clearCart()
+                  router.push("/products")
+                  resolve(true)
+                } else {
+                  reject(new Error("Payment verification failed"))
+                }
+              } catch (error) {
+                reject(error)
+              }
+            },
+            prefill: {
+              name: `${formData.firstName} ${formData.lastName}`,
+              email: formData.email,
+              contact: formData.phone,
+            },
+            theme: {
+              color: "#D4AF37",
+            },
+          }
+
+          const rzp = new window.Razorpay(options)
+          rzp.on("payment.failed", (response: any) => {
+            reject(new Error(`Payment failed: ${response.error.description}`))
+          })
+          rzp.open()
+        } catch (error) {
+          reject(error)
+        }
+      })
+    },
+    [totalPrice, formData, items, selectedSample, selectedSamples, appliedCoupon, clearCart, router],
+  )
+
   useEffect(() => {
     const script = document.createElement("script")
     script.src = "https://checkout.razorpay.com/v1/checkout.js"
     script.async = true
+    script.onerror = () => {
+      console.error("[v0] Failed to load Razorpay script")
+    }
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
     }
   }, [])
 
@@ -69,20 +163,6 @@ export default function CheckoutPage() {
 
   const discountAmount = calculateDiscount()
   const finalTotal = Math.max(totalPrice - discountAmount, 0)
-
-  if (items.length === 0) {
-    return (
-      <div className="min-h-screen bg-white py-20">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <h1 className="text-3xl font-serif mb-4">Your cart is empty</h1>
-          <p className="text-gray-600 mb-8">Add items to your cart before proceeding to checkout.</p>
-          <Button onClick={() => router.push("/products")} className="bg-gold hover:bg-gold/90 text-white">
-            Continue Shopping
-          </Button>
-        </div>
-      </div>
-    )
-  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -107,82 +187,6 @@ export default function CheckoutPage() {
       return false
     }
     return true
-  }
-
-  const handleRazorpayPayment = async (razorpayOrderId: string, keyId: string) => {
-    return new Promise((resolve, reject) => {
-      const options = {
-        key: keyId,
-        order_id: razorpayOrderId,
-        amount: Math.round(finalTotal * 100),
-        currency: "INR",
-        name: "PopLotus",
-        description: "Order from PopLotus",
-        customer_notify: 1,
-        notes: {
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.street,
-          city: formData.city,
-        },
-        handler: async (response: any) => {
-          try {
-            // Verify payment on server
-            const verifyResponse = await fetch("/api/verify-razorpay-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            })
-
-            if (verifyResponse.ok) {
-              const orderData = {
-                shippingAddress: formData,
-                items: items,
-                selectedSample: selectedSample,
-                selectedSamples: selectedSamples,
-                totalPrice: finalTotal,
-                appliedCoupon: appliedCoupon?.code || null,
-                paymentMethod: "razorpay",
-                razorpayOrderId: response.razorpay_order_id,
-                razorpayPaymentId: response.razorpay_payment_id,
-                orderDate: new Date().toISOString(),
-              }
-
-              const orders = JSON.parse(localStorage.getItem("orders") || "[]")
-              orders.push(orderData)
-              localStorage.setItem("orders", JSON.stringify(orders))
-
-              alert("Payment successful! Your order has been placed.")
-              clearCart()
-              router.push("/products")
-              resolve(true)
-            } else {
-              reject(new Error("Payment verification failed"))
-            }
-          } catch (error) {
-            reject(error)
-          }
-        },
-        prefill: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          contact: formData.phone,
-        },
-        theme: {
-          color: "#D4AF37",
-        },
-      }
-
-      const rzp = new window.Razorpay(options)
-      rzp.on("payment.failed", (response: any) => {
-        reject(new Error(`Payment failed: ${response.error.description}`))
-      })
-      rzp.open()
-    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -248,11 +252,25 @@ export default function CheckoutPage() {
         }
       }
     } catch (error) {
-      console.error("Error processing order:", error)
+      console.error("[v0] Error processing order:", error)
       alert("Error processing order. Please try again.")
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className="min-h-screen bg-white py-20">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h1 className="text-3xl font-serif mb-4">Your cart is empty</h1>
+          <p className="text-gray-600 mb-8">Add items to your cart before proceeding to checkout.</p>
+          <Button onClick={() => router.push("/products")} className="bg-gold hover:bg-gold/90 text-white">
+            Continue Shopping
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -372,7 +390,9 @@ export default function CheckoutPage() {
 
                 <div className="mt-6 pt-6 border-t">
                   <h3 className="text-lg font-serif mb-4">Add More to Your Order</h3>
-                  <ProductSuggestions cartTotal={totalPrice} />
+                  <div className="try-catch-wrapper">
+                    <ProductSuggestions cartTotal={totalPrice} />
+                  </div>
                 </div>
 
                 {/* Shipping Progress Bar */}
