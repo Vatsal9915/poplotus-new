@@ -500,7 +500,7 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {selectedSamples.length > 0 && (
+              {selectedSamples?.length > 0 && (
                 <div className="mb-4 space-y-2">
                   {selectedSamples.map((sample, index) => (
                     <div key={index} className="p-3 bg-green-50 rounded-lg border border-green-200">
