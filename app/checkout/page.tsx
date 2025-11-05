@@ -142,7 +142,7 @@ export default function CheckoutPage() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js"
     script.async = true
     script.onerror = () => {
-      console.error("[v0] Failed to load Razorpay script")
+      console.error("Failed to load Razorpay script")
     }
     document.body.appendChild(script)
 
@@ -247,12 +247,12 @@ export default function CheckoutPage() {
           await handleRazorpayPayment(razorpayOrderId, keyId)
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : "Unknown error"
-          console.error("[v0] Razorpay error:", errorMessage)
+          console.error("Razorpay error:", errorMessage)
           alert(`Payment error: ${errorMessage}`)
         }
       }
     } catch (error) {
-      console.error("[v0] Error processing order:", error)
+      console.error("Error processing order:", error)
       alert("Error processing order. Please try again.")
     } finally {
       setIsProcessing(false)
