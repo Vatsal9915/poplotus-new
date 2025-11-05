@@ -26,7 +26,7 @@ interface ShippingAddress {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, totalPrice, clearCart, selectedSample } = useCart();
+  const { items, totalPrice, clearCart, selectedSample, selectedSamples } = useCart()
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "razorpay">("cod");
   const [isProcessing, setIsProcessing] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState<CouponCode | null>(null);
@@ -129,7 +129,8 @@ export default function CheckoutPage() {
         const orderData = {
           shippingAddress: formData,
           items: items,
-          selectedSample,
+          selectedSample: selectedSample,
+          selectedSamples: selectedSamples,
           totalPrice: finalTotal,
           appliedCoupon: appliedCoupon?.code || null,
           paymentMethod: "cod",
@@ -150,7 +151,8 @@ export default function CheckoutPage() {
         const orderData = {
           shippingAddress: formData,
           items: items,
-          selectedSample,
+          selectedSample: selectedSample,
+          selectedSamples: selectedSamples,
           totalPrice: finalTotal,
           appliedCoupon: appliedCoupon?.code || null,
           paymentMethod: "razorpay",
@@ -441,6 +443,17 @@ export default function CheckoutPage() {
                     Free Sample
                   </p>
                   <p className="text-sm text-gray-600">{selectedSample}</p>
+                </div>
+              )}
+
+              {selectedSamples.length > 0 && (
+                <div className="mb-4 space-y-2">
+                  {selectedSamples.map((sample, index) => (
+                    <div key={index} className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-sm font-medium text-gray-900">Free Sample</p>
+                      <p className="text-sm text-green-700">{sample}</p>
+                    </div>
+                  ))}
                 </div>
               )}
 
