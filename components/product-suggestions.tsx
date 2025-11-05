@@ -162,7 +162,11 @@ export function ProductSuggestions({ cartTotal }: ProductSuggestionsProps) {
                   <p className="text-xs text-green-700 font-semibold">FREE</p>
                 </div>
                 <Button
-                  onClick={() => handleAddProduct(sample)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleAddProduct(sample)
+                  }}
                   size="sm"
                   className="bg-green-600 hover:bg-green-700 text-white"
                 >
